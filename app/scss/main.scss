@@ -1,0 +1,14 @@
+@import '../bower_components/normalize-scss/normalize';
+@import 'base';
+@import 'map';
+@import 'temp';
+
+
+.container {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    outline: 1px solid red;
+    color: #fff;
+    z-index: 1000;
+}

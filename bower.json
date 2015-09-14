@@ -1,0 +1,10 @@
+{
+  "name": "fsi",
+  "version": "0.0.0",
+  "dependencies": {
+    "jquery": "~2.1.0",
+    "normalize-scss": "~3.0.3",
+    "ractive": "~0.7.3"
+  },
+  "devDependencies": {}
+}
