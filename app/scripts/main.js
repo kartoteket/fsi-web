@@ -128,31 +128,37 @@ var x = d3.scale.linear()
 
 // ordinal scale for y-axis
 var y = d3.scale.ordinal()
-    .rangeRoundBands([0, height], .2);
+    .rangeRoundBands([0, height], 0.2);
 
 // graph X axis for quanttitative values
 var xAxis = d3.svg.axis()
     .scale(x)
-    .orient("bottom")
-    .ticks(10, "%");
+    .orient('bottom')
+    .ticks(10, '%');
 
 // graph Y axis for ordinal values
 var yAxis = d3.svg.axis()
     .scale(y)
-    .orient("left");
+    .orient('left');
 
 // create SVG object
-var svg = d3.select("body").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+var svg = d3.select('body').append('svg')
+    .attr('width', width + margin.left + margin.right)
+    .attr('height', height + margin.top + margin.bottom)
+  .append('g')
+    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
 // load data
-d3.tsv("data/test-data.tsv", type, function(error, data) {
+d3.tsv('data/test-data.tsv', function(error, data) {
 
-  if (error) throw error;
+  if (error) {
+    throw error;
+  }
 
+  // force int ??!
+  data.forEach(function(d) {
+    d.frequency = +d.frequency;
+  });
 
   // sort ascending
   data.sort(
@@ -168,38 +174,32 @@ d3.tsv("data/test-data.tsv", type, function(error, data) {
   y.domain(data.map(function(d) { return d.letter; }));
 
   // paint the x axis
-  svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
+  svg.append('g')
+      .attr('class', 'x axis')
+      .attr('transform', 'translate(0,' + height + ')')
       .call(xAxis)
-    .append("text")
-      // .attr("transform", "rotate(-90)")
-      .attr("y", 10)
-      .attr("dy", "1em")
-      .attr("class", "label")
-      .style("text-anchor", "middel")
-      .text("Frequency");
+    .append('text')
+      // .attr('transform', 'rotate(-90)')
+      .attr('y', 10)
+      .attr('dy', '1em')
+      .attr('class', 'label')
+      .style('text-anchor', 'middel')
+      .text('Frequency');
 
   // paint the y axis
-  svg.append("g")
-      .attr("class", "y axis")
+  svg.append('g')
+      .attr('class', 'y axis')
       .call(yAxis);
 
   // paint the bars
-  svg.selectAll(".bar")
+  svg.selectAll('.bar')
       .data(data)
-    .enter().append("rect")
-      .attr("class", "bar")
-      .attr("y", function(d) { return y(d.letter); })
-      .attr("height", y.rangeBand())
-      // .attr("x", function(d) { return x(d.frequency); })
-      // .attr("width", function(d) { return width - x(d.frequency); });
-      .attr("x", 0)
-      .attr("width", function(d) { return x(d.frequency); });
+    .enter().append('rect')
+      .attr('class', 'bar')
+      .attr('y', function(d) { return y(d.letter); })
+      .attr('height', y.rangeBand())
+      // .attr('x', function(d) { return x(d.frequency); })
+      // .attr('width', function(d) { return width - x(d.frequency); });
+      .attr('x', 0)
+      .attr('width', function(d) { return x(d.frequency); });
 });
-
-// jeg tror dette er for å tvinge til int
-function type(d) {
-  d.frequency = +d.frequency;
-  return d;
-}
