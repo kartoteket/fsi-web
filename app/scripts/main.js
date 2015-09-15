@@ -12,11 +12,15 @@
   var map,
     mapTiles,
     mapMarker,
-    panOptionsDefault = {};  // for overriding defaults
+    panOptionsDefault = {},  // for overriding defaults
+    initialSlide = Slides[0];
 
+  console.log(initialSlide);
+
+  // initalize map layer
   map = L.map('map', {
-    center: [52.5377, 13.3958],
-    zoom: 8,
+    center: initialSlide.map.position,
+    zoom: initialSlide.map.zoom,
     zoomControl: false,
     dragging: false,
     touchZoom: false,
