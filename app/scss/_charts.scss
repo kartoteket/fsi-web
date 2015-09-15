@@ -1,0 +1,35 @@
+
+/**
+* Temp testing out d3 bar charts
+*/
+
+.bar {
+    fill: steelblue;
+}
+
+.bar:hover {
+    fill: brown;
+}
+
+.axis {
+    font: 16px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #fff;
+    shape-rendering: crispEdges;
+}
+
+.x.axis path {
+    display: none;
+}
+
+.tick {
+    stroke: #fff;
+}
+
+.label {
+    stroke: #fff;
+}
