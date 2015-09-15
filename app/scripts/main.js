@@ -12,8 +12,7 @@
   var map,
     mapTiles,
     mapMarker,
-    panOptionsDefault = {
-    };
+    panOptionsDefault = {};  // for overriding defaults
 
   map = L.map('map', {
     center: [52.5377, 13.3958],
