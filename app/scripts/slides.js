@@ -17,6 +17,19 @@ var Slides = [
         }
     },
     {
+        'title' : 'Financial Secrecy Index 2015',
+        'subTitle'  : 'TOP 10 + Norden',
+        'text' : '<div class="chart"></div>',
+        'position' : 'center',
+        'size' :  'large',
+        'map' : {
+            'position' : [24.498300, -77.461427],
+            'zoom' : 3,
+            'panOptions' : {},
+            'marker' : [24.498300, -77.461427]
+        }
+    },
+    {
         'title' : 'Slide 2',
         'subTitle'  : 'SubTitle for second slide',
         'text' : 'Jippi!',
