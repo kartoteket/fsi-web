@@ -1,43 +1,115 @@
 /*jslint browser: true*/
-/*global L, Ractive */
+/*global L, Ractive, Slides, _ */
 
-(function (window, document, L, Ractive, undefined) {
-	'use strict';
+  'use strict';
 
-	L.Icon.Default.imagePath = 'images/';
+  // Leaflet
+  L.Icon.Default.imagePath = 'images/';
 
-	/* create leaflet map */
-	var map = L.map('map', {
-		center: [52.5377, 13.3958],
-		zoom: 4
-	});
+  /********************************** */
+  /* create leaflet map */
+  /********************************** */
+  var map,
+    mapTiles,
+    mapMarker,
+    panOptionsDefault = {},  // for overriding defaults
+    initialSlide = Slides[0];
 
-	var mapTiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-		subdomains: 'abcd',
-		maxZoom: 19
-	});
+  console.log(initialSlide);
 
-	mapTiles.addTo(map);
+  // initalize map layer
+  map = L.map('map', {
+    center: initialSlide.map.position,
+    zoom: initialSlide.map.zoom,
+    zoomControl: false,
+    dragging: false,
+    touchZoom: false,
+    scrollWheelZoom: false,
+    doubleClickZoom: false
 
-	/* add default stamen tile layer */
-	// new L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
-	// 	minZoom: 0,
-	// 	maxZoom: 18,
-	// 	attribution: 'Map data © <a href="http://www.openstreetmap.org">OpenStreetMap contributors</a>'
-	// }).addTo(map);
+  });
+
+  mapTiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+    subdomains: 'abcd',
+    unloadInvisibleTiles: false,    // doc: http://mourner.github.io/Leaflet/reference.html#tilelayer-unloadinvisibletiles
+    reuseTiles: true                // doc: http://mourner.github.io/Leaflet/reference.html#tilelayer-reusetiles
+  });
 
 
-	L.marker([52.5, 13.4]).addTo(map);
+  mapMarker = L.marker([52.5, 13.4]);
 
-}(window, document, L));
 
-(function (window, document, Ractive, undefined) {
+  mapTiles.addTo(map);
+  mapMarker.addTo(map);
 
-	var ractive = new Ractive({
-	  el: '#container',
-	  template: '#template',
-	  data: { name: 'world' }
-	});
 
-}(window, document, Ractive));
+  /********************************** */
+  // Ractive
+  /********************************** */
+  Ractive.load.baseUrl = 'components/';
+  Ractive.load( 'base.html' ).then( function ( BaseComponent ) {
+
+    var slideIndex = 0,
+        slide = Slides[slideIndex],
+        firstSlide = 0,
+        lastSlide = Slides.length-1,
+        ractive;
+
+    // initialize ractive component
+    ractive = new BaseComponent({
+
+      el: '#main',
+      data: {
+        'slide' : slide,
+        'visible' : true
+      },
+
+      // oninit : function() {
+      //  alert('x');
+      // }
+
+    });
+
+
+     // shift slide
+    ractive.on( 'step', function ( event, direction ) {
+
+      map.removeLayer(mapMarker);
+      ractive.set('visible', false);
+
+      //increment or decrement with 1
+      if(direction === 'next') {
+        slideIndex += 1;
+      } else {
+        slideIndex -=1;
+      }
+
+
+      // update slideIndex. Reset the lopp if over one edge.
+      switch(slideIndex) {
+        case firstSlide-1:
+          slideIndex = lastSlide;
+          break;
+        case lastSlide+1:
+          slideIndex = firstSlide;
+          break;
+      }
+
+      // switch slide in DOm
+      slide = Slides[slideIndex];
+      ractive.set('slide', slide);
+
+      map.on('zoomend', function() {
+            ractive.set('visible', true);
+            mapMarker = L.marker(slide.map.marker).addTo(map);
+      });
+
+      // control map
+      map.flyTo(slide.map.position, slide.map.zoom, _.extend(panOptionsDefault, slide.map.panOptions));
+
+
+    });
+
+});
+

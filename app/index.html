@@ -10,22 +10,27 @@
     <meta name="viewport" content="width=device-width">
 
     <!-- build:css styles/vendor.css -->
+<!--
     <link rel="stylesheet" href="lib/styles/leaflet.css">
+-->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.css" />
     <!-- bower:css -->
     <!-- endbower -->
     <!-- endbuild -->
 
-   	<!-- build:css styles/main.css -->
+    <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <link rel="shortcut icon" href="/favicon.ico">
+
+  <script src="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.js"></script>
 
 </head>
 <body>
 
 	<div class="map-application">
-    <div id='container' class="container"></div>
-		<div id="map" class="map"></div>
+    <div id='main'></div>
+		<div id="map" class="map"></div
 	</div>
 
   <script id='template' type='text/ractive'>
@@ -33,14 +38,20 @@
   </script>
 
 	<!-- build:js scripts/vendor.js -->
+<!--
 	<script src="lib/scripts/leaflet.js"></script>
+-->
   <!-- bower:js -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/ractive/ractive.js"></script>
+  <script src="bower_components/ractive-load/dist/ractive-load.js"></script>
+  <script src="bower_components/ractive-transitions-fade/dist/ractive-transitions-fade.js"></script>
+  <script src="bower_components/underscore/underscore.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
 	<!-- build:js scripts/main.js -->
+  <script src="scripts/slides.js"></script>
 	<script src="scripts/main.js"></script>
 	<!-- endbuild -->
 </body>

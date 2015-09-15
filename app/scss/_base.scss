@@ -1,5 +1,17 @@
 body,
 html {
     height: 100%;
+    background-color: $page-background-color;
     font-family: Arial, sans-serif;
+}
+
+
+.btn {
+    @extend %inuit-btn;
+}
+
+.centered {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
