@@ -13,15 +13,7 @@
 		mapTiles,
 		mapMarker,
 		panOptionsDefault = {
-			animate: true,
-			duration: 1.0,
-			easeLinearity: 0.15,
-			noMoveStart: false
-		},
-		zoomOptionsDefault = {
-			animate: true,
 		};
-
 
 	map = L.map('map', {
 		center: [52.5377, 13.3958],
@@ -90,19 +82,7 @@
 			ractive.set('slide', slide);
 
 			// control map
-			map.flyTo(slide.map.position, slide.map.zoom); // _.extend(panOptionsDefault, slide.map.panOptions)
-
-
-
-			// map
-			// 	.panTo(slide.map.position, _.extend(panOptionsDefault, slide.map.panOptions))
-			// 	.setZoom(slide.map.zoom, zoomOptionsDefault)
-			// ;
-			// map.setZoom(slide.map.zoom, zoomOptionsDefault).whenReady(function(){
-			// 	this.panTo(slide.map.position, _.extend(panOptionsDefault, slide.map.panOptions));
-			// });
-			// map.panTo(slide.map.position, _.extend(panOptionsDefault, slide.map.panOptions));
-
+			map.flyTo(slide.map.position, slide.map.zoom, _.extend(panOptionsDefault, slide.map.panOptions));
 			map.removeLayer(mapMarker);
 			mapMarker = L.marker(slide.map.marker).addTo(map);
 
