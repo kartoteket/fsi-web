@@ -4,13 +4,14 @@
 
 var Slides = [
     {
-        'title' : 'Slide 1',
-        'subTitle'  : 'SubTitle for first slide',
-        'text' : 'Lorem Ipsum',
-        'position' : 'tl',
+        'title' : 'Financial Secrecy Index 2015',
+        'subTitle'  : 'Tax Justice Network',
+        'text' : '<p>Financial Secrecy Index (FSI) rangerer verdens 60 skatteparadis. USA og Storbritannia kommer ut som to av de aller verste.</p><p>Skatteparadis er land eller områder som kjennetegnes ved at de har forskjellige skattesystemer for lokale innbyggere og utlendinger. Skatteparadis tilbyr ikke bare utlendinger lav eller ingen skatt, men også anonymitet og enkle, raske og fleksible regler for registrering. Dette er en grunn til at de også går under navnet ”secrecy jurisdictions”.</p>',
+        'position' : 'center',
+        'size' :  'large',
         'map' : {
             'position' : [24.498300, -77.461427],
-            'zoom' : 9,
+            'zoom' : 3,
             'panOptions' : {},
             'marker' : [24.498300, -77.461427]
         }
