@@ -32,7 +32,7 @@ gulp.task('html', ['styles', 'scripts'], function () {
     var jsFilter = $.filter('**/*.js');
     var cssFilter = $.filter('**/*.css');
 
-    return gulp.src('app/*.html')
+    return gulp.src('app/**/*.html')
         .pipe($.useref.assets())
         .pipe(jsFilter)
         .pipe($.uglify())
@@ -118,6 +118,7 @@ gulp.task('watch', ['connect', 'serve'], function () {
     // Watch for changes in `app` folder
     gulp.watch([
         'app/*.html',
+        'app/components/*.html',
         'app/styles/**/*.css',
         'app/scripts/**/*.js',
         'app/images/**/*'
