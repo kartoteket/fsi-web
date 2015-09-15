@@ -3,3 +3,4 @@ bower_components
 *.log
 dist
 .sass-cache
+app/styles/main.css
