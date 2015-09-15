@@ -1,10 +1,15 @@
 
-<div class="overlay overlay--{{slide.position}}" intro-outro="fade">
-    <h1>{{slide.title}}!</h1>
-    <h2>{{slide.subTitle}}!</h2>
-    <p>{{slide.text}}!</p>
+{{#if visible}}
+    <div class="overlay overlay--{{slide.position}} overlay--{{slide.size}}" intro-outro="fade">
+        <h1>{{slide.title}}!</h1>
+        <h2>{{slide.subTitle}}!</h2>
+        <p>{{{slide.text}}}!</p>
 
-<a on-click="step:prev">Prev</a>
-<a on-click="step:next">Next</a>
+    <!--
+    <a on-click="step:prev">Prev</a>
+    -->
 
-</div>
+        <a class="btn centered" on-click="step:next">Next</a>
+
+    </div>
+{{/if}}

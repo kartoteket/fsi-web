@@ -1,16 +1,20 @@
 
-$background-color : rgba(255, 255, 255, .77);
+$background-color : rgba(0, 0, 0, .77);
 
 .overlay {
     position: absolute;
     width: 25vw;
     height: 25vh;
 
+    padding: rem-calc($base-space*2);
+
     background-color: $background-color;
     color: isitlight($background-color, #000, #fff);
 
     z-index: 1000;
 
+
+    // positions
     &--tl {
         top: rem-calc($base-space*4);
         left: rem-calc($base-space*4);
@@ -31,5 +35,17 @@ $background-color : rgba(255, 255, 255, .77);
         left: rem-calc($base-space*4);
     }
 
+    &--center {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+
+    //sizes
+    &--large {
+        width: 50vh;
+        height: 50vh;
+    }
 
 }
