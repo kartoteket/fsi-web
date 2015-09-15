@@ -1,59 +1,7 @@
 /*jslint browser: true*/
-/*global L, Ractive, _ */
+/*global L, Ractive, Slides, _ */
 
 	'use strict';
-
-	var slides = [
-		{
-			'title' : 'Slide 1',
-			'subTitle'  : 'SubTitle for first slide',
-			'text' : 'Lorem Ipsum',
-			'position' : 'tl',
-			'map' : {
-				'position' : [24.498300, -77.461427],
-				'zoom' : 9,
-				'panOptions' : {},
-				'marker' : [24.498300, -77.461427]
-			}
-		},
-		{
-			'title' : 'Slide 2',
-			'subTitle'  : 'SubTitle for second slide',
-			'text' : 'Jippi!',
-			'position' : 'tr',
-			'map' : {
-				'position' : [24.498300, -77.461427],
-				'zoom' : 10,
-				'panOptions' : {},
-				'marker' : [24.498300, -77.461427],
-			}
-		},
-		{
-			'title' : 'Slide 3',
-			'subTitle'  : 'SubTitle for third slide',
-			'text' : 'Lorem Ipsum',
-			'position' : 'br',
-			'map' : {
-				'position' : [52.521331, 13.414150],
-				'zoom' : 11,
-				'panOptions' : {},
-				'marker' : [52.521331, 13.414150],
-			}
-		},
-		{
-			'title' : 'Slide 4',
-			'subTitle'  : 'SubTitle for third slide',
-			'text' : 'Lorem Ipsum',
-			'position' : 'bl',
-			'map' : {
-				'position' : [40.718927, -74.001654],
-				'zoom' : 12,
-				'panOptions' : {},
-				'marker' : [40.718927, -74.001654],
-			}
-		},
-	];
-
 
 	// Leaflet
 	L.Icon.Default.imagePath = 'images/';
@@ -101,9 +49,9 @@
 	Ractive.load( 'base.html' ).then( function ( BaseComponent ) {
 
 		var slideIndex = 0,
-			slide = slides[slideIndex],
+			slide = Slides[slideIndex],
 			firstSlide = 0,
-			lastSlide = slides.length-1,
+			lastSlide = Slides.length-1,
 		 	ractive = new BaseComponent({
 
 		  el: '#main',
@@ -138,7 +86,7 @@
 			}
 
 			// switch slide in DOm
-			slide = slides[slideIndex];
+			slide = Slides[slideIndex];
 			ractive.set('slide', slide);
 
 			// control map
