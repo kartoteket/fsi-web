@@ -51,13 +51,19 @@
   Ractive.load( 'base.html' ).then( function ( BaseComponent ) {
 
     var slideIndex = 0,
-      slide = Slides[slideIndex],
-      firstSlide = 0,
-      lastSlide = Slides.length-1,
-      ractive = new BaseComponent({
+        slide = Slides[slideIndex],
+        firstSlide = 0,
+        lastSlide = Slides.length-1,
+        ractive;
+
+    // initialize ractive component
+    ractive = new BaseComponent({
 
       el: '#main',
-      data: {'slide' : slide},
+      data: {
+        'slide' : slide,
+        'visible' : true
+      },
 
       // oninit : function() {
       //  alert('x');
@@ -68,6 +74,9 @@
 
      // shift slide
     ractive.on( 'step', function ( event, direction ) {
+
+      map.removeLayer(mapMarker);
+      ractive.set('visible', false);
 
       //increment or decrement with 1
       if(direction === 'next') {
@@ -91,12 +100,16 @@
       slide = Slides[slideIndex];
       ractive.set('slide', slide);
 
+      map.on('zoomend', function() {
+            ractive.set('visible', true);
+            mapMarker = L.marker(slide.map.marker).addTo(map);
+      });
+
       // control map
       map.flyTo(slide.map.position, slide.map.zoom, _.extend(panOptionsDefault, slide.map.panOptions));
-      map.removeLayer(mapMarker);
-      mapMarker = L.marker(slide.map.marker).addTo(map);
+
 
     });
 
-    });
+});
 
