@@ -18,7 +18,12 @@
 	map = L.map('map', {
 		center: [52.5377, 13.3958],
 		zoom: 8,
-		zoomControl: false
+		zoomControl: false,
+		dragging: false,
+		touchZoom: false,
+		scrollWheelZoom: false,
+		doubleClickZoom: false
+
 	});
 
 	mapTiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
