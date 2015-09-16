@@ -11,9 +11,9 @@
     fill: brown;
 }
 
-.axis {
-    font: 16px sans-serif;
-}
+// .axis {
+//     font: 16px sans-serif;
+// }
 
 .axis path,
 .axis line {
@@ -22,14 +22,12 @@
     shape-rendering: crispEdges;
 }
 
-.x.axis path {
-    display: none;
-}
+// .x.axis path {
+//     display: none;
+// }
 
-.tick {
-    stroke: #fff;
-}
-
+.tick,
 .label {
-    stroke: #fff;
+    stroke: #none;
+    fill: #fff;
 }
