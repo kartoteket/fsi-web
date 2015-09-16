@@ -1,27 +1,14 @@
-letter	frequency
-A	.08167
-B	.01492
-C	.02782
-D	.04253
-E	.12702
-F	.02288
-G	.02015
-H	.06094
-I	.06966
-J	.00153
-K	.00772
-L	.04025
-M	.02406
-N	.06749
-O	.07507
-P	.01929
-Q	.00095
-R	.05987
-S	.06327
-T	.09056
-U	.02758
-V	.00978
-W	.02360
-X	.00150
-Y	.01974
-Z	.00074
+rank	country	score
+1	Switzerland	78
+2	Luxembourg	67
+3	Hong Kong	72
+4	Cayman Islands	70
+5	Singapore	70
+6	USA	58
+7	Lebanon	79
+8	Germany	59
+9	Jersey	75
+10	Japan	61
+50	Norway	42
+66	Denmark	33
+71	Sweden	32
