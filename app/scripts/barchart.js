@@ -39,7 +39,11 @@ function wrap(text, width) {
   });
 }
 
-
+/**
+ * [barchart description]
+ * @param  {[type]} input [description]
+ * @return {[type]}       [description]
+ */
 function barchart(input){
 
   var margin = {top: 40, right: 80, bottom: 30, left: 40},

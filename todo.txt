@@ -1,5 +1,13 @@
 
 
+. et generisk system for animert posisjonering
+
+
+    width
+    height
+    top
+    left
+
 
 . style tekst-elementet
 . finne / lage custom markers
@@ -9,10 +17,11 @@
 	-> statistiske (kloropleth)
 
 . time overganger (avstander og duratiom)
-. kople på d3
+X kople på d3
 . teste med ande map-tiles
 . animire endringer til tekstboksen (fra kvadratisk i sentrum til lodrett på sida ?)
 . legge inn et statistikk-lag (fsi-talla)
+
 
 
 =========================
