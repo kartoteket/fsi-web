@@ -32,6 +32,18 @@
     <div id="map" class="map">
   </div>
 
+  <script id="baseTemplate" type="text/ractive">
+    {{#if visible}}
+        <div class="overlay overlay--{{slide.position}} overlay--{{slide.size}}" intro-outro="fade" style="top:{{slide.pos.top}}%; left:{{slide.pos.left}}%; bottom:{{slide.pos.bottom}}%; right:{{slide.pos.right}}%">
+            <h1>{{slide.title}}</h1>
+            <h2>{{slide.subTitle}}</h2>
+            {{{slide.text}}}
+            <a on-click="goto:{{current-1}}">Prev</a>
+            <a class="btn centered" on-click="goto:{{current+1}}">Next</a>
+        </div>
+    {{/if}}
+  </script>
+
 
   <script src="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.js"></script>
 
