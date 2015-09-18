@@ -8,12 +8,14 @@ var Slides = [
         'subTitle'  : 'Tax Justice Network',
         'text' : '<p>Financial Secrecy Index (FSI) rangerer verdens 60 skatteparadis. USA og Storbritannia kommer ut som to av de aller verste.</p><p>Skatteparadis er land eller områder som kjennetegnes ved at de har forskjellige skattesystemer for lokale innbyggere og utlendinger. Skatteparadis tilbyr ikke bare utlendinger lav eller ingen skatt, men også anonymitet og enkle, raske og fleksible regler for registrering. Dette er en grunn til at de også går under navnet ”secrecy jurisdictions”.</p>',
         'position' : 'center',
+        'pos' : {
+        },
         'size' :  'large',
         'map' : {
             'position' : [24.498300, -77.461427],
             'zoom' : 3,
             'panOptions' : {},
-            'marker' : [24.498300, -77.461427]
+            'marker' : [52.5, 13.4]
         }
     },
     {
@@ -21,19 +23,23 @@ var Slides = [
         'subTitle'  : '',
         'text' : '<div class="chart"></div>',
         'position' : 'center',
+        'pos' : {
+        },
         'size' :  'large',
         'map' : {
             'position' : [24.498300, -77.461427],
             'zoom' : 3,
             'panOptions' : {},
             'marker' : [24.498300, -77.461427]
-        }
+        },
+        'callback' : 'callbackChartView'
     },
     {
         'title' : 'Slide 2',
         'subTitle'  : 'SubTitle for second slide',
         'text' : 'Jippi!',
         'position' : 'tr',
+        'pos' : {},
         'map' : {
             'position' : [24.498300, -77.461427],
             'zoom' : 10,
@@ -46,6 +52,7 @@ var Slides = [
         'subTitle'  : 'SubTitle for third slide',
         'text' : 'Lorem Ipsum',
         'position' : 'br',
+        'pos' : {},
         'map' : {
             'position' : [52.521331, 13.414150],
             'zoom' : 11,
@@ -58,6 +65,7 @@ var Slides = [
         'subTitle'  : 'SubTitle for third slide',
         'text' : 'Lorem Ipsum',
         'position' : 'bl',
+        'pos' : {},
         'map' : {
             'position' : [40.718927, -74.001654],
             'zoom' : 12,
