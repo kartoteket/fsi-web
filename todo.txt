@@ -1,5 +1,12 @@
 
 
+
+==========
+
+Første versjon 15. oktober
+
+--------------
+
 . et generisk system for animert posisjonering
 
 

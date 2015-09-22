@@ -4,3 +4,5 @@ bower_components
 dist
 .sass-cache
 app/styles/main.css
+*.sublime-workspace
+tjnn-fsi.sublime-workspace
