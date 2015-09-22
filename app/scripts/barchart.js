@@ -90,7 +90,7 @@ function barchart(input){
 
     // sort ascending
     data.sort(
-      function(a, b) { return b.score - a.score; }
+      function(a, b) { return a.rank - b.rank; }
       );
 
   // console.log(data);

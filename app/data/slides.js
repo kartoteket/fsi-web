@@ -27,10 +27,10 @@ var Slides = [
         },
         'size' :  'large',
         'map' : {
-            'position' : [24.498300, -77.461427],
+            'position' : [52.521331, 13.414150],
             'zoom' : 3,
             'panOptions' : {},
-            'marker' : [24.498300, -77.461427]
+            // 'marker' : [24.498300, -77.461427]
         },
         'callback' : 'callbackChartView'
     },

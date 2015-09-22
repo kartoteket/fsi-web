@@ -151,19 +151,19 @@
 
         that.animate(
           {
-            'slide.pos.top' : 5,
-            'slide.pos.left': 5,
-            'slide.pos.bottom': 55,
+            'slide.pos.top' : 3,
+            'slide.pos.left': 3,
+            'slide.pos.bottom': 40,
             'slide.pos.right': 55,
           },
           {
-            'duration' : 1000,
+            'duration' : 800,
             'easing' : 'easeInOut',
             'complete' : function() {
                 that.set('slide.position','tl');
             }
           });
-      }, 1000);
+      }, 200);
 
     },
 
@@ -190,14 +190,15 @@
 
 
 function getColor(d) {
-    return d > 1000 ? '#800026' :
-           d > 500  ? '#BD0026' :
-           d > 200  ? '#E31A1C' :
-           d > 100  ? '#FC4E2A' :
-           d > 50   ? '#FD8D3C' :
-           d > 20   ? '#FEB24C' :
-           d > 10   ? '#FED976' :
-                      '#FFEDA0';
+console.log(d);
+      return d > 77 ? '#800026' :
+             d > 73  ? '#BD0026' :
+             d > 70  ? '#E31A1C' :
+             d > 60  ? '#FC4E2A' :
+             d > 50   ? '#FD8D3C' :
+             d > 40   ? '#FEB24C' :
+             d > 30   ? '#FED976' :
+                        '#FFEDA0';
 }
 
 function styleGeoJSON(feature) {

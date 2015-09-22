@@ -37,7 +37,9 @@
             <h1>{{slide.title}}</h1>
             <h2>{{slide.subTitle}}</h2>
             {{{slide.text}}}
+<!--
             <a on-click="goto:{{current-1}}">Prev</a>
+-->
             <a class="btn centered" on-click="goto:{{current+1}}">Next</a>
         </div>
     {{/if}}
