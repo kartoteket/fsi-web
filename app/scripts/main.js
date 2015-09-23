@@ -104,10 +104,36 @@
           slide : slide
         });
 
+        // if animate to new position
+        if( _.has(slide, 'animateTo') ) {
+            this.animateSlide();
+        }
+
         // update map
         this.updateMap();
 
     },
+
+    animateSlide : function() {
+      var that = this,
+          animateTo = this.get('slide.animateTo');
+
+      setTimeout(function(){
+        that.animate({
+          'slide.pos' : that.positions[animateTo.size][animateTo.position],
+          'slide.size' : animateTo.size
+          },
+          {
+            'duration' : 800,
+            'easing' : 'easeInOut',
+            // 'complete' : function() {
+            //     that.set('slide.position','tl');
+            // }
+          });
+      }, this.get('slide.animateTo.duration'));
+
+    },
+
 
     updateMap : function() {
 
@@ -162,25 +188,6 @@
 
       // inject the bar chart
       barchart('data/test-data.tsv');
-
-      // re-position
-      setTimeout(function(){
-
-        that.animate(
-          {
-            'slide.pos.top' : 3,
-            'slide.pos.left': 3,
-            'slide.pos.bottom': 40,
-            'slide.pos.right': 55,
-          },
-          {
-            'duration' : 800,
-            'easing' : 'easeInOut',
-            'complete' : function() {
-                that.set('slide.position','tl');
-            }
-          });
-      }, 200);
 
     },
 

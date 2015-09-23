@@ -22,6 +22,10 @@ var Slides = [
         'text' : '<div class="chart"></div>',
         'position' : 'center',
         'size' :  'medium',
+        'animateTo' : {
+            'position' : 'tl',
+            'size' : 'large',
+            'duration' : 300,
         },
         'map' : {
             'position' : [52.521331, 13.414150],
