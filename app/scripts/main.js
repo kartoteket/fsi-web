@@ -12,14 +12,31 @@
     map : {},
     mapMarkers : L.layerGroup(),    // group for all markes
     mapGeoJSON : L.layerGroup(),    // group for all geoJSON layers
-
+    // N-W-S-E coordinates for slides that in sum set size and position
+    // todo, move to config object
 
     positions : {
-        'center' : {'top' : 30, 'left' : 30, 'bottom' : 30, 'right' : 30 },
-        'tl' : {'top' : 5, 'left' : 5, 'bottom' : 55, 'right' : 55 },
-        'tr' : {'top' : 5, 'left' : 55, 'bottom' : 55, 'right' : 5 },
-        'br' : {'top' : 55, 'left' : 55, 'bottom' : 5, 'right' : 5 },
-        'bl' : {'top' : 55, 'left' : 5, 'bottom' : 5, 'right' : 55 },
+        'small' : {
+          'center' : {'top' : 40, 'left' : 40, 'bottom' : 40, 'right' : 40 },
+          'tl' : {'top' : 5, 'left' : 5, 'bottom' : 70, 'right' : 70 },
+          'tr' : {'top' : 5, 'left' : 70, 'bottom' : 70, 'right' : 5 },
+          'br' : {'top' : 70, 'left' : 70, 'bottom' : 5, 'right' : 5 },
+          'bl' : {'top' : 70, 'left' : 5, 'bottom' : 5, 'right' : 70 },
+        },
+        'medium' : {
+          'center' : {'top' : 30, 'left' : 30, 'bottom' : 30, 'right' : 30 },
+          'tl' : {'top' : 5, 'left' : 5, 'bottom' : 55, 'right' : 55 },
+          'tr' : {'top' : 5, 'left' : 55, 'bottom' : 55, 'right' : 5 },
+          'br' : {'top' : 55, 'left' : 55, 'bottom' : 5, 'right' : 5 },
+          'bl' : {'top' : 55, 'left' : 5, 'bottom' : 5, 'right' : 55 },
+        },
+        'large' : {
+          'center' : {'top' : 20, 'left' : 20, 'bottom' : 20, 'right' : 20 },
+          'tl' : {'top' : 5, 'left' : 5, 'bottom' : 40, 'right' : 40 },
+          'tr' : {'top' : 5, 'left' : 40, 'bottom' : 40, 'right' : 5 },
+          'br' : {'top' : 40, 'left' : 40, 'bottom' : 5, 'right' : 5 },
+          'bl' : {'top' : 40, 'left' : 5, 'bottom' : 5, 'right' : 40 },
+        },
     },
 
     oninit : function() {
@@ -79,7 +96,7 @@
         slide = slides[index];
 
         // positoning (work in progress...)
-        slide.pos = this.positions[slide.position];
+        slide.pos = this.positions[slide.size][slide.position];
 
         // update ractive data
         this.set({
