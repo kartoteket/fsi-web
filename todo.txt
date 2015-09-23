@@ -1,19 +1,9 @@
 
-
-
 ==========
 
 Første versjon 15. oktober
 
 --------------
-
-. et generisk system for animert posisjonering
-
-
-    width
-    height
-    top
-    left
 
 
 . style tekst-elementet
@@ -24,12 +14,13 @@ Første versjon 15. oktober
 	-> statistiske (kloropleth)
 
 . time overganger (avstander og duratiom)
-X kople på d3
 . teste med ande map-tiles
 . animire endringer til tekstboksen (fra kvadratisk i sentrum til lodrett på sida ?)
 . legge inn et statistikk-lag (fsi-talla)
 
-
+X kople på d3
+X lagt til animering av posisjon / størrelse 
+X et generisk system for animert posisjonering
 
 =========================
 FSI 2013, .tsv
