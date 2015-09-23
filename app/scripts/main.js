@@ -12,9 +12,9 @@
     map : {},
     mapMarkers : L.layerGroup(),    // group for all markes
     mapGeoJSON : L.layerGroup(),    // group for all geoJSON layers
+
     // N-W-S-E coordinates for slides that in sum set size and position
     // todo, move to config object
-
     positions : {
         'small' : {
           'center' : {'top' : 40, 'left' : 40, 'bottom' : 40, 'right' : 40 },
@@ -79,6 +79,15 @@
     //    console.log(this.map);
     // }
 
+    // TODO, funker ikke ??!?!?
+    restart: function() {
+        // this.reset(
+        //   {
+        //         visible : true,
+        //         slides : Slides,
+        //       }
+        //   );
+    },
 
     goto : function( index ){
 
@@ -91,8 +100,10 @@
           index = lastSlide;
         } else if( index > lastSlide) {
           index = 0;
+          // this.restart();  // reset all data for next loop | not in use
         }
 
+        // set new current slide
         slide = slides[index];
 
         // positoning (work in progress...)
@@ -161,9 +172,11 @@
 
     },
 
+
     transitionStart : function() {
       this.set('visible', false);
     },
+
 
     transitionEnd : function() {
 
@@ -180,7 +193,7 @@
 
     callbackChartView : function() {
 
-      var that = this;
+      // var that = this;
 
 
       // apply cloropleth
@@ -195,7 +208,8 @@
   });
 
 
-  var storyTeller = new StoryTeller({
+  // var storyTeller = new StoryTeller({
+    new StoryTeller({
 
     el: '#storyteller',
     data: {
@@ -214,7 +228,7 @@
 
 
 function getColor(d) {
-console.log(d);
+// console.log(d);
       return d > 77 ? '#800026' :
              d > 73  ? '#BD0026' :
              d > 70  ? '#E31A1C' :
@@ -227,7 +241,7 @@ console.log(d);
 
 function styleGeoJSON(feature) {
       return {
-          fillColor: getColor(feature.properties.fsi_score),
+          fillColor: getColor(feature.properties.fsiScore),
           weight: 2,
           opacity: 1,
           color: 'white',

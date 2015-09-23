@@ -36,6 +36,21 @@ var Slides = [
         'callback' : 'callbackChartView'
     },
     {
+        'title' : 'TEST',
+        'subTitle'  : '',
+        'text' : '<div class="chart"></div>',
+        'position' : 'center',
+        'size' :  'large',
+        'map' : {
+            'position' : [52.521331, 13.414150],
+            'zoom' : 3,
+            'panOptions' : {},
+            // 'marker' : [24.498300, -77.461427]
+        },
+        'callback' : ''
+    },
+/*
+    {
         'title' : 'Slide 2',
         'subTitle'  : 'SubTitle for second slide',
         'text' : 'Jippi!',
@@ -74,4 +89,5 @@ var Slides = [
             'marker' : [40.718927, -74.001654],
         }
     },
+*/
 ];
