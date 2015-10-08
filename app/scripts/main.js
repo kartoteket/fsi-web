@@ -1,6 +1,11 @@
 /*jslint browser: true*/
 /*global L, Ractive, Slides, _, barchart, countryData */
 
+/*
+
+TODO: Remove Slides and countryData (global). Not in use, replaced by request to api :-)
+ */
+
 (function (window, document, L, Ractive, Slides, _, barchart, countryData, undefined) {
 
   'use strict';
@@ -39,6 +44,12 @@
         },
     },
 
+
+
+    /**
+     * [oninit description]
+     * @return {[type]} [description]
+     */
     oninit : function() {
 
       var that = this;
@@ -75,21 +86,6 @@
     },
 
 
-    // onrender : function(){
-    //    console.log('Storyteller.onrender()');
-    //    console.log(this.map);
-    // }
-
-    // TODO, funker ikke ??!?!?
-    restart: function() {
-        // this.reset(
-        //   {
-        //         visible : true,
-        //         slides : Slides,
-        //       }
-        //   );
-    },
-
     goto : function( index ){
 
         var slide,
@@ -101,10 +97,9 @@
           index = lastSlide;
         } else if( index > lastSlide) {
           index = 0;
-          // this.restart();  // reset all data for next loop | not in use
         }
 
-        // set new current slide
+        // get new slide
         slide = slides[index];
 
         // positoning (work in progress...)
@@ -151,7 +146,8 @@
 
     updateMap : function() {
 
-      var slideMap  = this.get('slide.map'),
+      var that = this,
+          slideMap  = this.get('slide.map'),
           panOptionsDefault = {};
 
       // Clear Layers to clean up map
@@ -177,29 +173,41 @@
 
     },
 
-
-    transitionStart : function() {
+    /**
+     * Start tranistion between slides
+     */
+    transitionStart : function( ) {
+      console.log('Start tranistion');
       this.set('visible', false);
     },
 
 
+    /**
+     * Transition Complete
+     */
     transitionEnd : function() {
 
-      this.set('visible', true);
+      var that = this;
 
-      // if a function is defined in the slide-data, call it now
-      var slideCallBack = this.get('slide.callback');
-      if(slideCallBack) {
-        this[slideCallBack]();
-      }
+      this.set('visible', true).then( function () {
+
+        // if a function is defined in the slide-data, call it now
+        var slideCallBack = that.get('slide.callback');
+        if(slideCallBack) {
+          that[slideCallBack]();
+        }
+      });
+
+      console.log('End tranistion');
 
     },
 
 
+    /**
+     * [callbackChartView description]
+     * @return {[type]} [description]
+     */
     callbackChartView : function() {
-
-      // var that = this;
-
 
       // apply cloropleth
       this.mapGeoJSON.addLayer(L.geoJson(countryData, {style : styleGeoJSON}));
