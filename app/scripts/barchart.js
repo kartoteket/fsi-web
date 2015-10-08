@@ -77,7 +77,7 @@ function barchart(input){
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
   // load data
-  d3.tsv(input, function(error, data) {
+  d3.json(input, function(error, data) {
 
     if (error) {
       throw error;
