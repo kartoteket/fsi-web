@@ -64,8 +64,9 @@
         this.goto( index );
       });
 
+      // dodgy, but best I have
       this.map.on('zoomend', function() {
-        that.transitionEnd();
+        setTimeout( function() { that.transitionEnd(); }, 100);   // Race-condition: Jeg trenger et lite delay here, slik at ractive har oppdatert domen skikklig før evt callbacks blir kalt i transitionEnd
       });
 
       // start with the first slide
