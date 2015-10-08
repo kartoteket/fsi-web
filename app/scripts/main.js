@@ -205,7 +205,8 @@
       this.mapGeoJSON.addLayer(L.geoJson(countryData, {style : styleGeoJSON}));
 
       // inject the bar chart
-      barchart('data/test-data.tsv');
+      // barchart('data/test-data.tsv');
+      barchart('http://craft.dev/fsi.json');
 
     },
 
