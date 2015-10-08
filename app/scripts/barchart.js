@@ -133,7 +133,7 @@ function barchart(input){
           .append('rect')
             .attr('class', 'bar')
             .attr('y', function(d) { return y(d.rank); })
-            .attr('height', '1em')
+            .attr('height', y.rangeBand())
             // .attr('x', function(d) { return x(d.score); })
             // .attr('width', function(d) { return width - x(d.score); });
             .attr('x', 2)
@@ -145,10 +145,10 @@ function barchart(input){
         .data(data)
         .enter()
           .append('text')
-            .text(function(d) {return d.country; })
+            .text(function(d) {return d.jurisdiction; })
             .attr('x', function(d) { return (x(d.score)+10); })
             .attr('y', function(d) { return y(d.rank); })
-            .attr('dy', y.rangeBand())
+            .attr('dy', y.rangeBand()/1.8)
             .attr('class', 'label');
 
   });
