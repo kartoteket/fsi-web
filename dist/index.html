@@ -1,0 +1,54 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html> <!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<title>fsi</title>
+	<meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.css" />
+
+  <!-- Xbuild:css styles/vendor.css -->
+  <!-- bower:css -->
+  <!-- endbower -->
+  <!-- Xendbuild -->
+
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+</head>
+<body>
+
+  <div class="map-application">
+    <div id='storyteller'>
+      <StoryTeller />
+    </div>
+    <div id="map" class="map">
+  </div>
+
+  <script id="baseTemplate" type="text/ractive">
+    {{#if visible}}
+        <div class="overlay overlay--{{slide.position}} overlay--{{slide.size}}" intro-outro="fade" style="top:{{slide.pos.top}}%; left:{{slide.pos.left}}%; bottom:{{slide.pos.bottom}}%; right:{{slide.pos.right}}%">
+            <h1>{{slide.title}}</h1>
+            <h2>{{slide.subTitle}}</h2>
+            {{{slide.text}}}
+            <div class="chart"></div>
+<!--
+-->
+            <a class="btn" on-click="goto:{{current-1}}">Prev</a>
+            <a class="btn centered" on-click="goto:{{current+1}}">Next</a>
+        </div>
+    {{/if}}
+  </script>
+
+
+  <script src="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.js"></script>
+
+	<script src="scripts/vendor.js"></script>
+
+	<script src="scripts/main.js"></script>
+</body>
+</html>
