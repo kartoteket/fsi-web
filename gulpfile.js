@@ -57,7 +57,7 @@ gulp.task('images', function () {
 
 // Clean
 gulp.task('clean', function () {
-    return gulp.src(['dist/styles', 'dist/scripts', 'dist/images'], { read: false }).pipe($.clean());
+    return gulp.src(['dist/styles', 'dist/scripts', 'dist/images', 'dist/index.html'], { read: false }).pipe($.clean());
 });
 
 
@@ -118,6 +118,7 @@ gulp.task('watch', ['connect', 'serve'], function () {
     // Watch for changes in `app` folder
     gulp.watch([
         'app/*.html',
+//        'app/components/*.html',
         'app/styles/**/*.css',
         'app/scripts/**/*.js',
         'app/images/**/*'

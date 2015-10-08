@@ -1,0 +1,54 @@
+
+$background-color : rgba(0, 0, 0, .77);
+
+.overlay {
+    position: absolute;
+    // width: 25vw; //settes in in scriptet for å kunne animeres
+    // height: 25vh;
+
+    padding: rem-calc($base-space*2);
+
+    // transition: all .2s ease-in-out 0s;  // funka dårlig med ractive
+
+    background-color: $background-color;
+    color: isitlight($background-color, #000, #fff);
+
+    z-index: 1000;
+
+
+
+    // positions
+    &--tl {
+        top: rem-calc($base-space*4);
+        left: rem-calc($base-space*4);
+    }
+
+    &--tr {
+        top: rem-calc($base-space*4);
+        right: rem-calc($base-space*4);
+    }
+
+    &--br {
+        right: rem-calc($base-space*4);
+        bottom: rem-calc($base-space*4);
+    }
+
+    &--bl {
+        bottom: rem-calc($base-space*4);
+        left: rem-calc($base-space*4);
+    }
+
+    &--center {
+        // top: 50%;  // settes in script for å kunne animeres
+        // left: 50%;
+//        transform: translate(-50%, -50%);
+    }
+
+
+    //sizes (obsolete // settes in script for å kunne animeres)
+    &--large {
+        // width: 50vh;
+        // height: 50vh;
+    }
+
+}
