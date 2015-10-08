@@ -214,16 +214,36 @@
   });
 
 
+  /**
+   * [description]
+   * @param  {[type]} response) {                              var xhr [description]
+   * @param  {[type]} });                    } [description]
+   * @return {[type]}           [description]
+   */
+  loadJSON(function(response) {
+
+    var xhr = response.data;
+    console.log(xhr);
+
   // var storyTeller = new StoryTeller({
     new StoryTeller({
 
     el: '#storyteller',
     data: {
       visible : true,
-      slides : Slides,
+      slides : xhr,
     },
 
   });
+
+
+});
+
+
+
+
+
+
 
 
 /**
@@ -256,6 +276,26 @@ function styleGeoJSON(feature) {
       };
   }
 
+
+
+
+  //from: http://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
+ function loadJSON(callback) {
+
+    var xobj = new XMLHttpRequest();
+
+    xobj.overrideMimeType('application/json');  // Svale: needed ??!?
+    xobj.responseType = 'json';
+
+    xobj.open('GET', 'http://craft.dev/index.php/slides.json', true);
+    xobj.onreadystatechange = function () {
+          if (xobj.readyState === 4 && xobj.status === 200) {
+            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+            callback(xobj.response);
+          }
+    };
+    xobj.send(null);
+ }
 
 
 }(window, document, L, Ractive, Slides, _, barchart, countryData));
