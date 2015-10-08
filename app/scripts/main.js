@@ -166,8 +166,10 @@
       }
 
       // marker Layers
-      if(_.has(slideMap,'marker')) {
-        this.mapMarkers.addLayer(L.marker(slideMap.marker));
+      if(_.has(slideMap,'markers')) {
+        _.each(slideMap.markers, function(marker){
+          that.mapMarkers.addLayer(L.marker(marker));
+        });
       }
 
       // geoJson Layers
