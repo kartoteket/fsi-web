@@ -111,18 +111,20 @@
         slide.pos = this.positions[slide.size][slide.position];
 
         // update ractive data
-        this.set({
+        var promise = this.set({
           current: index,
           slide : slide
         });
 
-        // if animate to new position
+        promise.then( this.updateMap() );
+
+        // if animate to new positions      => TODO: Dette bør heller evt (kanskje ikke) være en animert overgang mellom (alle?) slidene, med evt global switch on/off
         if( _.has(slide, 'animateTo') ) {
             this.animateSlide();
         }
 
         // update map
-        this.updateMap();
+        // this.updateMap();
 
     },
 
