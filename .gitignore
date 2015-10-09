@@ -6,3 +6,9 @@ bower_components
 app/styles/main.css
 *.sublime-workspace
 tjnn-fsi.sublime-workspace
+craft/storage/userphotos
+craft/storage/runtime
+craft/storage/backups
+public_html/bower_components
+public_html/styles/main.css
+craft/config/db.php

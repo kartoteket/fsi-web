@@ -1,0 +1,52 @@
+{#
+ # News index template
+ # -------------------
+ #
+ # This template is loaded whenever http://example.com/news is
+ # requested, because it is located at news/index.html in your
+ # craft/templates/ folder.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://buildwithcraft.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+{% set title = "Financial Secrecy Index - 2013 Results" %}
+
+{% block content %}
+
+	<h1>Financial Secrecy Index - 2013 Results</h1>
+
+	{% for entry in craft.entries.section('fsi').find() %}
+
+    {% if entry.fsiTable | length %}
+
+        {% set field = craft.fields.getFieldByHandle('fsiTable') %}
+
+        <table>
+        <thead>
+            <tr>
+                {% for column in field.settings.columns %}
+                    <th>{{ column.heading }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in entry.fsiTable %}
+                <tr>
+                    <td>{{ row.rank }}</td>
+                    <td>{{ row.jurisdiction }}</td>
+                    <td>{{ row.value }}</td>
+                    <td>{{ row.score }}</td>
+                    <td>{{ row.weight }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+
+    {% endif %}
+
+	{% endfor %}
+{% endblock %}

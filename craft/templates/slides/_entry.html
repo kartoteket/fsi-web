@@ -1,0 +1,64 @@
+{#
+ # News entry template
+ # -------------------
+ #
+ # This template gets loaded whenever a News entry’s URL is
+ # requested. That’s because the News section’s Template setting is
+ # set to “news/_entry”, the path to this template.
+ #
+ # When this template is loaded, it will already have an ‘entry’
+ # variable, set to the requested News entry.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://buildwithcraft.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+
+{% block content %}
+	<article>
+		<h1>{{ entry.title }}</h1>
+		<h2>{{entry.subTitle}}</h2>
+		{{ entry.text }}
+
+        <ul>
+            <li>Size: {{ entry.size }}</li>
+            <li>Position: {{ entry.position }}</li>
+        </ul>
+        <h4>Map</h4>
+        <ul>
+            <li>Center: [{{ entry.mapCenterLat }}, {{ entry.mapCenterLong }}]</li>
+            <li>ZoomLevel: {{ entry.mapZoom }}</li>
+
+            {% if entry.markers | length %}
+                <li>Markers:
+                    <ol>
+                       {% for marker in entry.markers %}
+                            <li>[{{ marker.lat }}, {{ marker.long }}]</li>
+                                {% if marker.address | length %}
+                                    {% cache %}
+                                        {{ marker.address | coordinates }}
+                                    {% endcache %}
+                                {% endif %}
+
+                        {% endfor %}
+                    </ol>
+                </li>
+            {% endif %}
+
+            {% if entry.animateTo.type('animation') | length %}
+                <li>Animation:
+                    {% for block in entry.animateTo.type('animation') %}
+                        <ul>
+                            <li>Size: {{ block.size }}</li>
+                            <li>Position: {{ block.position }}</li>
+                            <li>Duration: {{ block.duration }}</li>
+                        </ul>
+                    {% endfor %}
+                </li>
+            {% endif %}
+
+        </ul>
+
+	</article>
+{% endblock %}
