@@ -214,7 +214,7 @@ TODO: Remove Slides and countryData (global). Not in use, replaced by request to
 
       // inject the bar chart
       // barchart('data/test-data.tsv');
-      barchart('http://craft.dev/fsi.json');
+      barchart('http://fsi2015.taxjustice.no/fsi.json');
 
     },
 
@@ -295,7 +295,7 @@ function styleGeoJSON(feature) {
     xobj.overrideMimeType('application/json');  // Svale: needed ??!?
     xobj.responseType = 'json';
 
-    xobj.open('GET', 'http://craft.dev/index.php/slides.json', true);
+    xobj.open('GET', 'http://fsi2015.taxjustice.no/slides.json', true);
     xobj.onreadystatechange = function () {
           if (xobj.readyState === 4 && xobj.status === 200) {
             // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
