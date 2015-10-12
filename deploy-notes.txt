@@ -1,0 +1,96 @@
+Minnimal versjon som funker litt
+
+cd /var/www/no.taxjustice.fsi2015/
+rm -dr public_html/
+mkdir public_html
+cp -a dist/. public_html/
+
+
+===============================
+
+
+# set owner to deploy
+chown -R www-deploy /var/www/no.taxjustice.fsi2015
+
+#set group to apache/php
+chgrp -R www-data /var/www/no.taxjustice.fsi2015
+
+# set permissions to (rwx rw- ---)
+chmod -R 750 /var/www/no.taxjustice.fsi2015
+
+# set group id
+# chmod g+s /var/www/no.taxjustice.fsi2015
+
+# add apache/php write access to selected craft folders
+chmod -R g+w /var/www/no.taxjustice.fsi2015/craft/app
+chmod -R g+w /var/www/no.taxjustice.fsi2015/craft/config
+chmod -R g+w /var/www/no.taxjustice.fsi2015/craft/storage
+
+# unmask to so that new files so that new files default to 640 (rw- r-- ---)
+umask 027
+
+# clean out old public_html and rename dist to new public_html
+rm -rd /var/www/no.taxjustice.fsi2015/public_html
+mv /var/www/no.taxjustice.fsi2015/dist /var/www/no.taxjustice.fsi2015/public_html
+
+
+## OBSOLETE
+# copy new files from dist to public_html (recursivly, preserve file timestamps)
+# rsync -rtpog /var/www/no.taxjustice.fsi2015/dist/ /var/www/no.taxjustice.fsi2015/public_html/
+# mkdir /var/www/no.taxjustice.fsi2015/public_html
+# cp -a /var/www/no.taxjustice.fsi2015/dist/* /var/www/no.taxjustice.fsi2015/public_html/
+
+
+===============================
+
+
+# copy files from dist to public_html (recursivly, preserve file timestamps)
+rsync -rt /var/www/no.taxjustice.fsi2015/dist/ /var/www/no.taxjustice.fsi2015/public_html/
+
+# set owner to deploy
+chown -R www-deploy /var/www/no.taxjustice.fsi2015
+
+#set group to apache/php
+chgrp -R www-data /var/www/no.taxjustice.fsi2015
+
+# set permissions to (rwx rw- ---)
+chmod -R 750 /var/www/no.taxjustice.fsi2015
+
+# set group id
+chmod g+s /var/www/no.taxjustice.fsi2015
+
+# add apache/php write access to selected craft folders
+chmod -R g+w /var/www/no.taxjustice.fsi2015/craft/app
+chmod -R g+w /var/www/no.taxjustice.fsi2015/craft/config
+chmod -R g+w /var/www/no.taxjustice.fsi2015/craft/storage
+
+# unmask to so that new files so that new files default to 640 (rw- r-- ---)
+umask 027
+
+
+============
+
+
+# set owner to deploy
+chown -R www-deploy /var/www/no.taxjustice.fsi2015
+
+#set group to apache/php
+chgrp -R www-data /var/www/no.taxjustice.fsi2015
+
+# set permissions to (rwx rw- ---)
+chmod -R 750 /var/www/no.taxjustice.fsi2015
+
+# set group id
+chmod -R g+s /var/www/no.taxjustice.fsi2015
+
+# add apache/php write access to selected craft folders
+chmod -R g+w /var/www/no.taxjustice.fsi2015/craft/app
+chmod -R g+w /var/www/no.taxjustice.fsi2015/craft/config
+chmod -R g+w /var/www/no.taxjustice.fsi2015/craft/storage
+
+# unmask to so that new files so that new files default to 640 (rw- r-- ---)
+umask 027
+
+# clean out old public_html and rename dist to new public_html
+rm -rd /var/www/no.taxjustice.fsi2015/public_html
+mv /var/www/no.taxjustice.fsi2015/dist /var/www/no.taxjustice.fsi2015/public_html
