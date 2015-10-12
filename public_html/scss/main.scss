@@ -9,10 +9,30 @@ $base-line-height:          24 !default;
 $base-space:                8 !default;
 
 // colors
-$page-background-color:     #242426 !default;
+$page-background-color :    #CDD2D4 !default; //light || dark: #242426
+// $slide-background-color :   rgba(0, 0, 0, .77);
+$slide-background-color :   rgba(255, 255, 255, .77);
 
-
+// inuit
 $inuit-namespace:           inuit-;
+
+// sizes
+$sizes : 16 !default;
+
+// breakpoints
+$breakpoints: (
+    'small': (max-width:  767px),
+    'medium': (min-width:  768px),
+    'large': (min-width: 1200px),
+    'xlarge': (min-width: 1600px),
+    'xxlarge': (min-width: 1920px)
+);
+
+// other
+$base-font-weight :         400 !default;
+$base-curves:               5;
+
+
 
 
 /**
@@ -24,10 +44,12 @@ $inuit-namespace:           inuit-;
 
 @import '../bower_components/inuit-functions/tools.functions';
 @import 'tools/functions';
+@import 'tools/mixins';
 
 @import '../bower_components/inuit-buttons/objects.buttons';
 
 @import 'base';
+@import 'type';
 @import 'map';
 @import 'overlays';
 @import 'charts';

@@ -1,0 +1,8 @@
+h1 {
+    @include respond-to(small)  {
+        @include font-size($base-font-size);
+    }
+    @include respond-to(medium) { @include font-size(round($base-font-size*1.2)); }
+    @include respond-to(large)  { @include font-size(round($base-font-size*2)); }
+    @include respond-to(xxlarge){ @include font-size(round($base-font-size*2)); }
+}

@@ -1,47 +1,75 @@
 
-$background-color : rgba(0, 0, 0, .77);
+$background-color : $slide-background-color;
+
+.overlay-wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    // transform-style: preserve-3d;
+}
 
 .overlay {
+
     position: absolute;
-    // width: 25vw; //settes in in scriptet for å kunne animeres
-    // height: 25vh;
-
+    max-width: 40rem;
     padding: rem-calc($base-space*2);
-
-    // transition: all .2s ease-in-out 0s;  // funka dårlig med ractive
-
+    border-radius: rem-calc($base-curves);
     background-color: $background-color;
     color: isitlight($background-color, #000, #fff);
-
     z-index: 1000;
 
+    @include respond-to(small)  { 
+        width: 80vw; 
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    @include respond-to(medium) { width: 75vw; }
+    @include respond-to(large)  { width: 50vw; }
+    @include respond-to(xxlarge){ width: 25vw; }
+
+
+      // top: 50%;
+      // transform: translateY(-50%);
+
+    // position: absolute;
+    // width: 25vw; //settes in in scriptet for å kunne animeres
+    // height: 25vh;
+    // transition: all .2s ease-in-out 0s;  // funka dårlig med ractive
 
 
     // positions
-    &--tl {
-        top: rem-calc($base-space*4);
-        left: rem-calc($base-space*4);
-    }
+    @include respond-to(medium)
+    {
+        &--tl {
+            top: rem-calc($base-space*4);
+            left: rem-calc($base-space*4);
+        }
 
-    &--tr {
-        top: rem-calc($base-space*4);
-        right: rem-calc($base-space*4);
-    }
+        &--tr {
+            top: rem-calc($base-space*4);
+            right: rem-calc($base-space*4);
+        }
 
-    &--br {
-        right: rem-calc($base-space*4);
-        bottom: rem-calc($base-space*4);
-    }
+        &--br {
+            right: rem-calc($base-space*4);
+            bottom: rem-calc($base-space*4);
+        }
 
-    &--bl {
-        bottom: rem-calc($base-space*4);
-        left: rem-calc($base-space*4);
-    }
+        &--bl {
+            bottom: rem-calc($base-space*4);
+            left: rem-calc($base-space*4);
+        }
 
-    &--center {
-        // top: 50%;  // settes in script for å kunne animeres
-        // left: 50%;
-//        transform: translate(-50%, -50%);
+        &--center {
+            top: 50%;
+            left: 50%;
+           transform: translate(-50%, -50%);
+        }
     }
 
 

@@ -1,0 +1,62 @@
+@mixin respond-to($name) {
+    // If the key exists in the map
+    @if map-has-key($breakpoints, $name) {
+        // Prints a media query based on the value
+        @media #{inspect(map-get($breakpoints, $name))} {
+            @content;
+        }
+
+    // If the key doesn't exist in the map
+    } @else {
+        @warn "Unfortunately, no value could be retrieved from `#{$breakpoints}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+    }
+}
+
+
+@mixin size($size: grow, $total: $total-columns) {
+    @if (type-of($size) == 'number') {
+        $pct: percentage($size / $total);
+        flex-basis: $pct !important;
+        max-width: $pct;        // max-width prevents columns from wrapping early in IE10/11
+    } @else if ($size == shrink) {
+        flex-basis: auto;
+        overflow: visible;
+    } @else if ($size == grow) {
+        flex: 1 1 auto;
+    }
+}
+
+
+// forked  (and adapted) from https://github.com/inuitcss/tools.mixins
+@mixin font-size($font-size, $line-height: auto, $weight: $base-font-weight) {
+
+    $font-size: strip-unit($font-size);
+    $base-font-size : strip-unit($base-font-size);
+    $base-line-height : strip-unit($base-line-height);
+
+    @if ($line-height == auto or $line-height == null) {
+        $line-height: ceil($font-size / $base-line-height) * ($base-line-height / $font-size);
+
+    } @else {
+
+        @if (type-of($line-height) == number or $line-height == inherit or $line-height == normal) {
+            $line-height: $line-height;
+        }
+
+        @elseif ($line-height != none and $line-height != false) {
+
+            @warn "D’oh! ‘#{$line-height}’ is not a valid value for `line-height`."
+        }
+
+    }
+
+    font-size: $font-size * 1px;
+    font-size: ($font-size / $base-font-size) * 1rem;
+    @if ($weight != $base-font-weight) {
+        font-weight: $weight;
+    }
+    @if ($line-height != false) {
+        line-height: $line-height;
+    }
+}
