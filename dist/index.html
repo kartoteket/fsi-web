@@ -39,7 +39,9 @@
             <h1>{{slide.title}}</h1>
             <h2>{{slide.subTitle}}</h2>
             {{{slide.text}}}
-            <div class="chart"></div>
+            {{#if chartEnabled}}
+              <div class="chart"></div>
+            {{/if}}
 <!--
 -->
             <a class="btn" on-click="goto:{{current-1}}">Prev</a>
