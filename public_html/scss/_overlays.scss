@@ -57,11 +57,11 @@ $background-color : $slide-background-color;
 
         &--br {
             right: rem-calc($base-space*4);
-            bottom: rem-calc($base-space*4);
+            bottom: rem-calc($base-space*12);
         }
 
         &--bl {
-            bottom: rem-calc($base-space*4);
+            bottom: rem-calc($base-space*12);
             left: rem-calc($base-space*4);
         }
 
