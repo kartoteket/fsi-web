@@ -58,14 +58,26 @@ gulp.task('images', function () {
         .pipe($.size());
 });
 
+// Copy other frontend files
+gulp.task('copy', function () {
+    return gulp.src([
+            'public_html/.htaccess',
+            'public_html/robots.txt',
+            'public_html/index.php'])
+        .pipe(gulp.dest('dist'))
+        .pipe($.size());
+});
+
+
 // Clean
 gulp.task('clean', function () {
-    return gulp.src(['dist/styles', 'dist/scripts', 'dist/images', 'dist/index.html'], { read: false }).pipe($.clean());
+    // return gulp.src(['dist/styles', 'dist/scripts', 'dist/images', 'dist/index.html'], { read: false }).pipe($.clean());
+    return gulp.src(['dist'], { read: false }).pipe($.clean());
 });
 
 
 // Build
-gulp.task('build', ['html', 'images']);
+gulp.task('build', ['html', 'images', 'copy']);
 
 // Default task
 gulp.task('default', ['clean'], function () {
