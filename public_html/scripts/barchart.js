@@ -46,9 +46,10 @@ function wrap(text, width) {
  */
 function barchart(input){
 
-  var margin = {top: 40, right: 80, bottom: 30, left: 40},
+  var margin = {top: 40, right: 80, bottom: 40, left: 0},
       width = 600 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
+      height = 400 - margin.top - margin.bottom,
+      viewBox = '0 0 600 400';
 
   // quantitative scale for x-axis
   var x = d3.scale.linear()
@@ -70,9 +71,11 @@ function barchart(input){
       .orient('left');
 
   // create SVG object
+
   var svg = d3.select('.chart').append('svg')
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom)
+      // .attr('width', width + margin.left + margin.right)
+      // .attr('height', height + margin.top + margin.bottom)
+      .attr('viewBox', viewBox)
     .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 

@@ -3,6 +3,23 @@
 * Temp testing out d3 bar charts
 */
 
+// ref: http://tympanus.net/codrops/2014/08/19/making-svgs-responsive-with-css/
+.chart {
+    height: 0;             /* collapse the container's height */
+    width: 100%;           /* specify any width you want (a percentage value, basically) */
+    padding-top: 60%;
+    position: relative;    /* create positioning context for svg */
+
+    svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+}
+
 .bar {
     fill: steelblue;
 }
@@ -18,7 +35,7 @@
 .axis path,
 .axis line {
     fill: none;
-    stroke: #fff;
+    stroke: isitlight($slide-background-color, #000, #fff);
     shape-rendering: crispEdges;
 }
 
@@ -29,5 +46,5 @@
 .tick,
 .label {
     stroke: #none;
-    fill: #fff;
+    fill: isitlight($slide-background-color, #000, #fff);
 }

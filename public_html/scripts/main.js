@@ -175,6 +175,7 @@
      */
     transitionStart : function( ) {
       console.log('Start tranistion');
+      this.set('chartEnabled', false); // hide chart for each slide, re-enable if needed
       this.set('visible', false);
     },
 
@@ -211,6 +212,7 @@
 
       // inject the bar chart
       // barchart('data/test-data.tsv');
+      this.set('chartEnabled', true);
       barchart('http://fsi2015.taxjustice.no/fsi.json');
 
     },
