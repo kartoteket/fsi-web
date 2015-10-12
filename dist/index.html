@@ -23,7 +23,7 @@
 <body>
 
   <div class="map-application">
-    <div id='storyteller'>
+    <div id="storyteller" class="overlay-wrap">
       <StoryTeller />
     </div>
     <div id="map" class="map">
@@ -31,7 +31,11 @@
 
   <script id="baseTemplate" type="text/ractive">
     {{#if visible}}
+<!--
         <div class="overlay overlay--{{slide.position}} overlay--{{slide.size}}" intro-outro="fade" style="top:{{slide.pos.top}}%; left:{{slide.pos.left}}%; bottom:{{slide.pos.bottom}}%; right:{{slide.pos.right}}%">
+-->
+        <div class="overlay overlay--{{slide.position}} overlay--{{slide.size}}" intro-outro="fade">
+
             <h1>{{slide.title}}</h1>
             <h2>{{slide.subTitle}}</h2>
             {{{slide.text}}}
