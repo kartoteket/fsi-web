@@ -38,9 +38,11 @@
 -->
         <div class="overlay overlay--{{slide.position}} overlay--{{slide.size}}" intro-outro="fade">
 
-            <h1>{{slide.title}}</h1>
-            <h2>{{slide.subTitle}}</h2>
-            {{{slide.text}}}
+            <h1 class="overlay__header">{{slide.title}}</h1>
+            <h2 class="overlay__subheader">{{slide.subTitle}}</h2>
+            <div class="overlay__text">
+              {{{slide.text}}}
+            </div>
             {{#if chartEnabled}}
               <div class="chart"></div>
             {{/if}}

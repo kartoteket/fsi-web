@@ -13,3 +13,19 @@
 .map-application {
     height: 100%;
 }
+
+
+
+
+/**
+ *  Overriding Leaflet
+ */
+
+/* attribution and scale controls */
+.leaflet-container .leaflet-control-attribution {
+    background: none !important;
+
+    a {
+        color: $border-color;
+    }
+}
