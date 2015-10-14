@@ -114,62 +114,62 @@ return [
                 'first' => true,
                 'transformer' => function(EntryModel $entry) {
 
-                // basic data
-                $return = [
-                    'title' => $entry->title,
-                    'subtitle' => $entry->subTitle,
-                    'text' => (string) $entry->text,
-                    'position' => $entry->position->value,
-                    'size' => $entry->size->value,
-                    'url' => $entry->url,
-                    'jsonUrl' => UrlHelper::getUrl("slides/{$entry->id}.json"),
-                ];
+                    // basic data
+                    $return = [
+                        'title' => $entry->title,
+                        'subtitle' => $entry->subTitle,
+                        'text' => (string) $entry->text,
+                        'position' => $entry->position->value,
+                        'size' => $entry->size->value,
+                        'url' => $entry->url,
+                        'jsonUrl' => UrlHelper::getUrl("slides/{$entry->id}.json"),
+                    ];
 
-                // animations
-                $animations = [];
-                foreach ($entry->animateTo->type('animation') as $i => $animation) {
-                    $animations[$i]['position'] = $animation->position->value;
-                    $animations[$i]['size'] = $animation->size->value;
-                    $animations[$i]['duration'] = (int) $animation->duration;
-                };
-                if(!empty($animations)) {
-                    $return['animateTo'] = $animations[0]; // might be multiple ??!?
-                }
-
-                // markers
-                $markers = [];
-                foreach ($entry->markers as $marker) {
-
-                    if(!empty($marker['lat']) && !empty($marker['long'])) {
-                        $markers[] = array((float) $marker['lat'] , (float) $marker['long']);
+                    // animations
+                    $animations = [];
+                    foreach ($entry->animateTo->type('animation') as $i => $animation) {
+                        $animations[$i]['position'] = $animation->position->value;
+                        $animations[$i]['size'] = $animation->size->value;
+                        $animations[$i]['duration'] = (int) $animation->duration;
+                    };
+                    if(!empty($animations)) {
+                        $return['animateTo'] = $animations[0]; // might be multiple ??!?
                     }
 
-                    if(!empty($marker['address'])) {
-                        $markers[] = getLocation($marker['address']);
+                    // markers
+                    $markers = [];
+                    foreach ($entry->markers as $marker) {
+
+                        if(!empty($marker['lat']) && !empty($marker['long'])) {
+                            $markers[] = array((float) $marker['lat'] , (float) $marker['long']);
+                        }
+
+                        if(!empty($marker['address'])) {
+                            $markers[] = getLocation($marker['address']);
+                        }
+
                     }
 
-                }
+
+                    // map
+                    $map = [
+                        'position' => getLocation($entry->mapCenter),
+                        'zoom' => (int) $entry->mapZoom['value'],
+                    ];
+                    if(!empty($markers)) {
+                        $map['markers'] = $markers;
+                    }
+                    $return['map'] = $map;
 
 
-                // map
-                $map = [
-                    'position' => getLocation($entry->mapCenter),
-                    'zoom' => (int) $entry->mapZoom['value'],
-                ];
-                if(!empty($markers)) {
-                    $map['markers'] = $markers;
-                }
-                $return['map'] = $map;
+                    // callback
+                    if(!empty($entry->callback)) {
+                        $return['callback'] = $entry->callback;
+                    }
 
 
-                // callback
-                if(!empty($entry->callback)) {
-                    $return['callback'] = $entry->callback;
-                }
-
-
-                // return
-                return $return;
+                    // return
+                    return $return;
 
                 },
             ];
