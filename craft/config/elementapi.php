@@ -178,11 +178,37 @@ return [
         'fsi.json' => [
             'elementType' => 'Entry',
             'criteria' => ['section' => 'fsi'],
-            'first' => true,
+            // 'first' => true,
             'transformer' => function(EntryModel $entry) {
-                return $entry->fsiTable;
+                return  [
+                    'title' => $entry->title,
+                    'url' => $entry->url,
+                    'jsonUrl' => UrlHelper::getUrl("fsi/{$entry->slug}.json"),
+                ];
             },
         ],
+
+        'fsi/<slug:\w+>.json' => function($slug) {
+
+
+            return [
+                'elementType' => 'Entry',
+                'criteria' => ['slug' => $slug],
+                'first' => true,
+                'transformer' => function(EntryModel $entry) {
+
+                    // limit table rows by query paramater.
+                    // can be set with a default (second paramteter in getParam())
+                    $limit = craft()->request->getParam('limit', null);
+                    $rows = $entry->fsiTable;
+                    if($limit) {
+                        $rows = array_slice($rows,0,$limit);
+                    }
+                    return $rows;
+
+                },
+            ];
+        },
 
 
         'news.json' => [
