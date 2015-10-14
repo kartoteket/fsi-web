@@ -213,7 +213,7 @@
       // inject the bar chart
       // barchart('data/test-data.tsv');
       this.set('chartEnabled', true);
-      barchart('http://fsi2015.taxjustice.no/fsi.json');
+      barchart('/fsi/2015.json?limit=10');
 
     },
 
@@ -294,7 +294,7 @@ function styleGeoJSON(feature) {
     xobj.overrideMimeType('application/json');  // Svale: needed ??!?
     xobj.responseType = 'json';
 
-    xobj.open('GET', 'http://fsi2015.taxjustice.no/slides.json', true);
+    xobj.open('GET', '/slides.json', true);
     xobj.onreadystatechange = function () {
           if (xobj.readyState === 4 && xobj.status === 200) {
             // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
