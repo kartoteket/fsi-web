@@ -23,6 +23,12 @@
 
         {% set field = craft.fields.getFieldByHandle('fsiTable') %}
 
+            {% for row in entry.fsiTable %}
+                {"label":"{{ row.jurisdiction }}","value":"{{ row.countryCode }}","default":""},<br />
+            {% endfor %}
+
+
+
         <table>
         <thead>
             <tr>
@@ -35,6 +41,7 @@
             {% for row in entry.fsiTable %}
                 <tr>
                     <td>{{ row.rank }}</td>
+                    <td>{{ row.countryCode }}</td>
                     <td>{{ row.jurisdiction }}</td>
                     <td>{{ row.value }}</td>
                     <td>{{ row.score }}</td>
