@@ -57,6 +57,26 @@
 
 	<script src="scripts/vendor.js"></script>
 
+
+<script>
+      L.TopoJSON = L.GeoJSON.extend({
+        addData: function(jsonData) {
+          if (jsonData.type === 'Topology') {
+            for (var key in jsonData.objects) {
+              var geojson = topojson.feature(jsonData, jsonData.objects[key]);
+              L.GeoJSON.prototype.addData.call(this, geojson);
+            }
+          }
+          else {
+            L.GeoJSON.prototype.addData.call(this, jsonData);
+          }
+
+          return this;
+        }
+      });
+      // Copyright (c) 2013 Ryan Clark
+</script>
+
 	<script src="scripts/main.js"></script>
 </body>
 </html>

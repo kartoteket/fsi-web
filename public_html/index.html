@@ -61,15 +61,35 @@
   <!-- bower:js -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/d3/d3.js"></script>
+  <script src="bower_components/queue-async/queue.js"></script>
   <script src="bower_components/ractive/ractive.js"></script>
-  <script src="bower_components/ractive-load/dist/ractive-load.js"></script>
   <script src="bower_components/ractive-transitions-fade/dist/ractive-transitions-fade.js"></script>
   <script src="bower_components/underscore/underscore.js"></script>
+  <script src="bower_components/topojson/topojson.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
+
+<script>
+      L.TopoJSON = L.GeoJSON.extend({
+        addData: function(jsonData) {
+          if (jsonData.type === 'Topology') {
+            for (var key in jsonData.objects) {
+              var geojson = topojson.feature(jsonData, jsonData.objects[key]);
+              L.GeoJSON.prototype.addData.call(this, geojson);
+            }
+          }
+          else {
+            L.GeoJSON.prototype.addData.call(this, jsonData);
+          }
+
+          return this;
+        }
+      });
+      // Copyright (c) 2013 Ryan Clark
+</script>
+
 	<!-- build:js scripts/main.js -->
-  <script src="data/countries.js"></script>
   <script src="scripts/barchart.js"></script>
 	<script src="scripts/main.js"></script>
 	<!-- endbuild -->

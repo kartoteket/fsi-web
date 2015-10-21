@@ -83,8 +83,14 @@ return [
                     if(!empty($marker['address'])) {
                         $markers[] = getLocation($marker['address']);
                     }
-
                 }
+
+                // highlights
+                $highlights = [];
+                foreach ($entry->highlight as $i => $country) {
+                    $highlights[$country->value] =  $country->label;
+                }
+
 
                 // map
                 $map = [
@@ -94,6 +100,10 @@ return [
                 if(!empty($markers)) {
                     $map['markers'] = $markers;
                 }
+                if(!empty($highlights)) {
+                    $map['highlights'] = $highlights;
+                }
+
                 $return['map'] = $map;
 
                 // callback
@@ -150,6 +160,11 @@ return [
 
                     }
 
+                    // highlights
+                    $highlights = [];
+                    foreach ($entry->highlight as $i => $country) {
+                        $highlights[$country->value] =  $country->label;
+                    }
 
                     // map
                     $map = [
@@ -158,6 +173,9 @@ return [
                     ];
                     if(!empty($markers)) {
                         $map['markers'] = $markers;
+                    }
+                    if(!empty($highlights)) {
+                        $map['highlights'] = $highlights;
                     }
                     $return['map'] = $map;
 

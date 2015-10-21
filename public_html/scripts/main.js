@@ -1,8 +1,8 @@
-/*jslint browser: true*/
-/*global L, Ractive, _, barchart, countryData */
+/*jslint browser: true, camelcase: false, latedef: nofunc  */
+/*global L, Ractive, d3, topojson, queue, _, barchart */
 
 
-(function (window, document, L, Ractive, _, barchart, countryData, undefined) {
+(function (window, document, L, Ractive, d3, topojson, queue, _, barchart, undefined) {
 
   'use strict';
 
@@ -11,6 +11,7 @@
     template : '#baseTemplate',
 
     map : {},
+    topoJson : false,
     mapMarkers : L.layerGroup(),    // group for all markes
     mapGeoJSON : L.layerGroup(),    // group for all geoJSON layers
 
@@ -48,12 +49,16 @@
      */
     oninit : function() {
 
-      var that = this;
+      // load json data
+      this.loadJson();
+
+      var that = this,
+          devMode = true;
 
       // initiate Leaflet map
       L.Icon.Default.imagePath = 'images/';
 
-      this.map = L.map('map', {zoomControl: false, dragging: false, touchZoom: false, scrollWheelZoom: false, doubleClickZoom: false});
+      this.map = L.map('map', {zoomControl: devMode, dragging: devMode, touchZoom: devMode, scrollWheelZoom: devMode, doubleClickZoom: devMode});
 
       // L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
       L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
@@ -81,7 +86,6 @@
       this.goto( 0 );
 
     },
-
 
     goto : function( index ){
 
@@ -141,6 +145,11 @@
     },
 
 
+
+    /**
+     * [updateMap description]
+     * @return {[type]} [description]
+     */
     updateMap : function() {
 
       var that = this,
@@ -165,19 +174,61 @@
         });
       }
 
-      // geoJson Layers
-      // todo ?!?
-
+      // geoJson Layers | TODO: Better defier / wait function
+      if(_.has(slideMap,'highlights')) {
+        if(!!this.topoJson) {
+          this.higlightCountries(slideMap.highlights);
+        } else {
+         setTimeout(this.higlightCountries(slideMap.highlights),1000);
+        }
+      }
     },
+
+
+    /**
+     * [higlightCountries description]
+     * @param  {[type]} highlights [description]
+     * @return {[type]}            [description]
+     */
+    higlightCountries : function( highlights ) {
+
+      // TODO, better defer/ wait function
+      if(!!this.topoJson) {
+
+        // clone.... TODO: Better to send highlights ass paramtere to topoLayer.addData() and filter there...
+        var topoLayer = new L.TopoJSON();
+        var x = JSON.parse(JSON.stringify(this.topoJson));
+
+        // filter if not show all
+        if(!highlights.hasOwnProperty('all'))
+        {
+          x.objects.subunits.geometries = _.filter(this.topoJson.objects.subunits.geometries, function(c){
+            return highlights.hasOwnProperty(c.id);
+          });
+        }
+
+        // add data, set styles and bind popup
+        topoLayer.addData(x)
+          .setStyle(styleGeoJSON)
+          .eachLayer(function (layer){
+            layer.bindPopup(layer.feature.properties.name);
+          });
+
+        // add layer to map
+        this.mapGeoJSON.addLayer(topoLayer);
+      }
+    },
+
 
     /**
      * Start tranistion between slides
      */
     transitionStart : function( ) {
-      console.log('Start tranistion');
+      // console.log('Start tranistion');
       this.set('chartEnabled', false); // hide chart for each slide, re-enable if needed
       this.set('visible', false);
     },
+
 
 
     /**
@@ -196,8 +247,42 @@
         }
       });
 
-      console.log('End tranistion');
+      // console.log('End tranistion');
 
+    },
+
+
+    /**
+     * Loads the topojson and extends it with the fsi data
+     * @return {[type]} [description]
+     */
+    loadJson : function() {
+
+      var that = this;
+
+      queue()
+          .defer(d3.json, '/data/all.json')
+          .defer(d3.json, '/fsi/2015.json?limit=102')
+          .await(_loadJson);
+
+      function _loadJson(error, topoJson, fsi) {
+
+        if (error) {
+          return console.error(error);
+        }
+
+        // extend topjson with dataset properties
+        for (var key in topoJson.objects) {
+          for(var feature in topoJson.objects[key].geometries) {
+            var obj = topoJson.objects[key].geometries[feature];
+            var props = _.find(fsi, function(c){ return c.countryCode === obj.id; });
+            _.extend(obj.properties, _.pick(props,'rank','score','value'));
+           }
+        }
+
+        that.topoJson = topoJson;
+
+      }
     },
 
 
@@ -207,11 +292,7 @@
      */
     callbackChartView : function() {
 
-      // apply cloropleth
-      this.mapGeoJSON.addLayer(L.geoJson(countryData, {style : styleGeoJSON}));
-
       // inject the bar chart
-      // barchart('data/test-data.tsv');
       this.set('chartEnabled', true);
       barchart('/fsi/2015.json?limit=10');
 
@@ -230,7 +311,6 @@
   loadJSON(function(response) {
 
     var xhr = response.data;
-    console.log(xhr);
 
   // var storyTeller = new StoryTeller({
     new StoryTeller({
@@ -261,6 +341,7 @@
 
 
 function getColor(d) {
+// TODO: Replace....
 // console.log(d);
       return d > 77 ? '#800026' :
              d > 73  ? '#BD0026' :
@@ -273,20 +354,27 @@ function getColor(d) {
 }
 
 function styleGeoJSON(feature) {
-      return {
-          fillColor: getColor(feature.properties.fsiScore),
-          weight: 2,
-          opacity: 1,
-          color: 'white',
-          dashArray: '3',
-          fillOpacity: 0.7
-      };
-  }
+    return {
+        fillColor: getColor(feature.properties.score),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    };
+}
+
+
+// function eventGeoJson(feature, layer) {
+// if (feature.properties && feature.properties.jurisdiction) {
+//         layer.bindPopup(feature.properties.jurisdiction);
+//     }
+// }
 
 
 
-
-  //from: http://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
+// from: http://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
+// TODO: Replace with d3 .json()
  function loadJSON(callback) {
 
     var xobj = new XMLHttpRequest();
@@ -305,4 +393,4 @@ function styleGeoJSON(feature) {
  }
 
 
-}(window, document, L, Ractive, _, barchart, countryData));
+}(window, document, L, Ractive, d3, topojson, queue, _, barchart));

@@ -1,5 +1,50 @@
 
-==========
+scp /Users/svale/Downloads/fsi.sql www-deploy@berlin.pipalbot.com:/var/www/no.taxjustice.fsi2015/db
+mysql -u tjnn_db -p tjnn < /var/www/no.taxjustice.fsi2015/db/fsi.sql
+WPTbN7xkCRCAk7
+
+==============
+
+For å rulle sin egen geojson (og topojson) topo/world-10m.json
+Se også: http://bost.ocks.org/mike/map/
+
+==== alle:
+
+ogr2ogr  -f GeoJSON -where "ADM0_A3 IN ('AND', 'AIA', 'ATG', 'ABW', 'AUS', 'AUT', 'BHS', 'BHR', 'BRB', 'BEL', 'BLZ', 'BMU', 'BOL', 'BWA', 'BRA', 'VGB', 'BRN', 'CAN', 'CYM', 'CHL', 'CHN', 'COK', 'CRI', 'CUW', 'CYP', 'CZE', 'DNK', 'DMA', 'DOM', 'EST', 'FIN', 'FRA', 'GMB', 'DEU', 'GHA', 'GIB', 'GRC', 'GRD', 'GTM', 'GGY', 'HKG', 'HUN', 'ISL', 'IND', 'IRL', 'IMN', 'ISR', 'ITA', 'JPN', 'JEY', 'KOR', 'LVA', 'LBN', 'LBR', 'LIE', 'LUX', 'MAC', 'MKD', 'MYS', 'MDV', 'MLT', 'MHL', 'MUS', 'MEX', 'MCO', 'MNE', 'MSR', 'NRU', 'NLD', 'NZL', 'NOR', 'PAN', 'PRY', 'PHL', 'POL', 'PRT', 'RUS', 'KNA', 'LCA', 'VCT', 'WSM', 'SMR', 'SAU', 'SYC', 'SGP', 'SVK', 'SVN', 'ZAF', 'ESP', 'SWE', 'CHE', 'TWN', 'TZA', 'TUR', 'TCA', 'VIR', 'USA', 'ARE', 'GBR', 'URY', 'VUT', 'VEN')" subunits.json Downloads/ne_10m_admin_0_map_subunits/ne_10m_admin_0_map_subunits.shp
+
+ogr2ogr  -f GeoJSON -where "ADM0_A3 IN ('AND', 'AIA', 'ATG', 'ABW', 'AUS', 'AUT', 'BHS', 'BHR', 'BRB', 'BEL', 'BLZ', 'BMU', 'BOL', 'BWA', 'BRA', 'VGB', 'BRN', 'CAN', 'CYM', 'CHL', 'CHN', 'COK', 'CRI', 'CUW', 'CYP', 'CZE', 'DNK', 'DMA', 'DOM', 'EST', 'FIN', 'FRA', 'GMB', 'DEU', 'GHA', 'GIB', 'GRC', 'GRD', 'GTM', 'GGY', 'HKG', 'HUN', 'ISL', 'IND', 'IRL', 'IMN', 'ISR', 'ITA', 'JPN', 'JEY', 'KOR', 'LVA', 'LBN', 'LBR', 'LIE', 'LUX', 'MAC', 'MKD', 'MYS', 'MDV', 'MLT', 'MHL', 'MUS', 'MEX', 'MCO', 'MNE', 'MSR', 'NRU', 'NLD', 'NZL', 'NOR', 'PAN', 'PRY', 'PHL', 'POL', 'PRT', 'KNA', 'LCA', 'VCT', 'WSM', 'SMR', 'SAU', 'SYC', 'SGP', 'SVK', 'SVN', 'ZAF', 'ESP', 'SWE', 'CHE', 'TWN', 'TZA', 'TUR', 'TCA', 'VIR', 'USA', 'ARE', 'GBR', 'URY', 'VUT', 'VEN')" subunits.json /Users/svale/Repositories/world-atlas/shp/ne_50m_admin_0_countries.shp
+
+
+topojson -o all.json --id-property SU_A3 --properties name=NAME -- subunits.json
+
+==== top 10:
+
+# download and make shp-file
+make topo/world-10m.json
+
+# create geojson file with filter
+ogr2ogr  -f GeoJSON -where "ADM0_A3 IN ('CHE', 'HKG', 'USA', 'SGP', 'CYM', 'LUX', 'LBN', 'DEU', 'BHR', 'ARE')" subunits1.json Downloads/ne_10m_admin_0_map_subunits/ne_10m_admin_0_map_subunits.shp
+ogr2ogr  -f GeoJSON -where "ADM0_A3 IN ('CHE', 'HKG', 'USA', 'SGP', 'CYM', 'LUX', 'LBN', 'DEU', 'BHR', 'ARE')" subunits.json /Users/svale/Repositories/world-atlas/shp/ne_50m_admin_0_countries.shp
+
+#create topojson from geojson
+topojson -o top10.json --id-property SU_A3 --properties name=NAME -- subunits.json
+
+
+
+========
+
+ogr2ogr  -f GeoJSON -where "ADM0_A3 IN ('CHE', 'HKG', 'USA', 'SGP', 'CYM', 'LUX', 'LBN', 'DEU', 'BHR', 'ARE')" subunits.json /Users/svale/Repositories/world-atlas/shp/ne_110m_admin_0_countries.shp
+
+
+
+=========================
+
+Andre Geojson filer:
+https://github.com/johan/world.geo.json
+https://gist.github.com/markmarkoh/2969317
+
+=========================
+
 
 Første versjon 15. oktober
 
@@ -11,7 +56,7 @@ Første versjon 15. oktober
 . Lage typer "slides"
     -> vanlig text + lokasjon
     -> pepre med markører
-    -> statistiske (kloropleth)
+    X statistiske (kloropleth)
 
 . time overganger (avstander og duratiom)
 
@@ -22,6 +67,11 @@ X legge inn et statistikk-lag (fsi-talla)
 X kople på d3
 X lagt til animering av posisjon / størrelse 
 X et generisk system for animert posisjonering
+
+==================================
+
+ * Spm:
+  - hvordan skal vi rangere, etter score, eller value (rank)
 
 
 ==================================

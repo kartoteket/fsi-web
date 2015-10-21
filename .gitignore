@@ -3,7 +3,6 @@ bower_components
 *.log
 .DS_Store
 .sass-cache
-app/styles/main.css
 *.sublime-workspace
 tjnn-fsi.sublime-workspace
 craft/storage/userphotos
