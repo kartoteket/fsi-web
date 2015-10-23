@@ -11,3 +11,4 @@ craft/storage/backups
 public_html/bower_components
 public_html/styles/main.css
 craft/config/db.php
+public_html/data copy

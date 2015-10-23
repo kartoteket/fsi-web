@@ -4,6 +4,7 @@
 var gulp = require('gulp');
 // var open = require('open');
 var wiredep = require('wiredep').stream;
+var merge = require('merge-stream');
 
 // Load plugins
 var $ = require('gulp-load-plugins')();
@@ -62,12 +63,20 @@ gulp.task('images', function () {
 
 // Copy other frontend files
 gulp.task('copy', function () {
-    return gulp.src([
+
+    var root = gulp.src([
             'public_html/.htaccess',
             'public_html/robots.txt',
             'public_html/index.php'])
         .pipe(gulp.dest('dist'))
         .pipe($.size());
+
+    var data = gulp.src([
+            'public_html/data/*'])
+        .pipe(gulp.dest('dist/data'))
+        .pipe($.size());
+
+    return merge(root, data);
 });
 
 
