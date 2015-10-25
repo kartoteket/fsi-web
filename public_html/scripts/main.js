@@ -77,23 +77,27 @@
       this.mapMarkers.addTo(this.map);
       this.mapGeoJSON.addTo(this.map);
 
-      // Events
-      this.on( 'goto', function ( event, index ) {
-        this.transitionStart();
-        this.goto( index );
-      });
+      // Events (obsoloete - replaced by router)
+      // this.on( 'goto', function ( event, index ) {
+      //   this.transitionStart();
+      //   this.set('current', index);
+      // });
 
       // dodgy, but best I have
       this.map.on('zoomend', function() {
         setTimeout( function() { that.transitionEnd(); }, 100);   // Race-condition: Jeg trenger et lite delay here, slik at ractive har oppdatert domen skikklig før evt callbacks blir kalt i transitionEnd
       });
 
-      // start with the first slide
-      this.goto( 0 );
-
+      this.observe( 'current', function ( newValue, oldValue, keypath ) {
+        if(newValue !== undefined && newValue !== oldValue && this.get('loading') === false) { // if loading is true, we wait for it to complete and the trigger the got from there
+          this.goto( newValue );
+        }
+      });
     },
 
     goto : function( index ){
+
+        this.transitionStart();
 
         var slide,
             slides = this.get('slides'),
@@ -114,7 +118,8 @@
 
         // update ractive data
         var promise = this.set({
-          current: index,
+          // current: index,
+          next: index+1,
           slide : slide
         });
 
