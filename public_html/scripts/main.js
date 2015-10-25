@@ -6,9 +6,15 @@
 
   'use strict';
 
-  var StoryTeller = Ractive.extend({
+  var storyTeller = new Ractive({
 
     template : '#baseTemplate',
+    el: '#storyteller',
+    data: {
+      loading : true,
+      current : 0,
+      next: 1,
+    },
 
     map : {},
     topoJson : false,
@@ -330,6 +336,14 @@
 
 
 
+    // var storyTeller = new StoryTeller({
+    //   el: '#storyteller',
+    //   data: {
+    //     loading : true,
+    //     current : 0,
+    //     next: 2,
+    //   }
+    // });
 
 
 
