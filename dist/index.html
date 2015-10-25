@@ -5,16 +5,11 @@
 <!--[if gt IE 8]><!--> <html> <!--<![endif]-->
 <head>
 	<meta charset="UTF-8">
-	<title>fsi</title>
+	<title>Financial Secrecy Index - by Tax Justice Network</title>
 	<meta name="description" content="">
   <meta name="viewport" content="width=device-width">
 
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.css" />
-
-  <!-- Xbuild:css styles/vendor.css -->
-  <!-- bower:css -->
-  <!-- endbower -->
-  <!-- Xendbuild -->
+  <link rel="stylesheet" href="styles/vendor-bfd0bcc30e.css">
 
   <link rel="stylesheet" href="styles/main-5d8d5a9b25.css">
   <link rel="shortcut icon" href="/favicon.ico">
@@ -41,42 +36,27 @@
             <div class="overlay__text">
               {{{slide.text}}}
             </div>
+<!--
+            <p>
+              <a href="#/page/0">home</a>
+              <a href="#/page/9">end</a>
+            </p>
+-->
             {{#if chartEnabled}}
               <div class="chart"></div>
             {{/if}}
 <!--
--->
             <a class="btn" on-click="goto:{{current-1}}">Prev</a>
             <a class="btn centered" on-click="goto:{{current+1}}">Next</a>
+-->
+            <a class="btn centered" href="#/page/{{ next }}">Next</a>
         </div>
     {{/if}}
   </script>
 
 
-  <script src="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.js"></script>
+	<script src="scripts/vendor-625cfdd1a2.js"></script>
 
-	<script src="scripts/vendor-68a5fc4538.js"></script>
-
-
-<script>
-      L.TopoJSON = L.GeoJSON.extend({
-        addData: function(jsonData) {
-          if (jsonData.type === 'Topology') {
-            for (var key in jsonData.objects) {
-              var geojson = topojson.feature(jsonData, jsonData.objects[key]);
-              L.GeoJSON.prototype.addData.call(this, geojson);
-            }
-          }
-          else {
-            L.GeoJSON.prototype.addData.call(this, jsonData);
-          }
-
-          return this;
-        }
-      });
-      // Copyright (c) 2013 Ryan Clark
-</script>
-
-	<script src="scripts/main-68a82a99d3.js"></script>
+	<script src="scripts/main-acadaec973.js"></script>
 </body>
 </html>
