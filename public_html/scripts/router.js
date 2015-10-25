@@ -1,5 +1,5 @@
 /*global window, Router, storyTeller */
-(function (window, Router, storyTeller) {
+(function (window, Router, storyTeller, undefined) {
     'use strict';
 
     // We're using https://github.com/flatiron/director for routing

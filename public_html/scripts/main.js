@@ -6,6 +6,25 @@
 
   'use strict';
 
+  L.TopoJSON = L.GeoJSON.extend({
+    addData: function(jsonData) {
+      if (jsonData.type === 'Topology') {
+        for (var key in jsonData.objects) {
+          var geojson = topojson.feature(jsonData, jsonData.objects[key]);
+          L.GeoJSON.prototype.addData.call(this, geojson);
+        }
+      }
+      else {
+        L.GeoJSON.prototype.addData.call(this, jsonData);
+      }
+
+      return this;
+    }
+  });
+  // Copyright (c) 2013 Ryan Clark
+
+  Ractive.DEBUG = /unminified/.test(function(){/*unminified*/});
+
   var storyTeller = new Ractive({
 
     template : '#baseTemplate',
@@ -286,7 +305,6 @@
 
         that.set({
           'loading' : false,
-          'visible' : true,
           'slides' : slides.data,
         });
 
@@ -300,7 +318,7 @@
         }
         that.topoJson = topoJson;
 
-        // start with the first slide
+        // and now we can load a slide... 
         that.goto( that.get('current') );
 
       }
