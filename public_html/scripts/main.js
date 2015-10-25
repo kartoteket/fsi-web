@@ -304,8 +304,11 @@
 
     },
 
-
   });
+
+    window.storyTeller = storyTeller;
+
+
 
 
   /**
