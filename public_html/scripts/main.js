@@ -17,7 +17,7 @@
     },
 
     map : {},
-    topoJson : false,
+    // topoJson : true,
     mapMarkers : L.layerGroup(),    // group for all markes
     mapGeoJSON : L.layerGroup(),    // group for all geoJSON layers
 
@@ -182,11 +182,12 @@
 
       // geoJson Layers | TODO: Better defier / wait function
       if(_.has(slideMap,'highlights')) {
-        if(!!this.topoJson) {
           this.higlightCountries(slideMap.highlights);
-        } else {
-         setTimeout(this.higlightCountries(slideMap.highlights),1000);
-        }
+        // if(!!this.topoJson) {
+        //   this.higlightCountries(slideMap.highlights);
+        // } else {
+        //  setTimeout(this.higlightCountries(slideMap.highlights),1000);
+        // }
       }
     },
 
@@ -199,7 +200,7 @@
     higlightCountries : function( highlights ) {
 
       // TODO, better defer/ wait function
-      if(!!this.topoJson) {
+      // if(!!this.topoJson) {
 
         // clone.... TODO: Better to send highlights ass paramtere to topoLayer.addData() and filter there...
         var topoLayer = new L.TopoJSON();
@@ -222,7 +223,7 @@
 
         // add layer to map
         this.mapGeoJSON.addLayer(topoLayer);
-      }
+      // }
     },
 
 
