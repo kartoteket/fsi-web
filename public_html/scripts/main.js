@@ -267,15 +267,22 @@
       var that = this;
 
       queue()
+          .defer(d3.json, '/slides.json')
           .defer(d3.json, '/data/all.json')
           .defer(d3.json, '/fsi/2015.json?limit=102')
           .await(_loadJson);
 
-      function _loadJson(error, topoJson, fsi) {
+      function _loadJson(error, slides, topoJson, fsi) {
 
         if (error) {
           return console.error(error);
         }
+
+        that.set({
+          'loading' : false,
+          'visible' : true,
+          'slides' : slides.data,
+        });
 
         // extend topjson with dataset properties
         for (var key in topoJson.objects) {
@@ -285,8 +292,10 @@
             _.extend(obj.properties, _.pick(props,'rank','score','value'));
            }
         }
-
         that.topoJson = topoJson;
+
+        // start with the first slide
+        that.goto( that.get('current') );
 
       }
     },
@@ -317,26 +326,19 @@
    * @param  {[type]} });                    } [description]
    * @return {[type]}           [description]
    */
-  loadJSON(function(response) {
+  //  loadJSON(function(response) {
 
-    var xhr = response.data;
+  //   var xhr = response.data;
+  //   var storyTeller = new StoryTeller({
+  //     el: '#storyteller',
+  //     data: {
+  //       visible : true,
+  //       slides : xhr,
+  //     },
+  //   });
+  //   window.storyTeller = storyTeller;
 
-  // var storyTeller = new StoryTeller({
-    new StoryTeller({
-
-    el: '#storyteller',
-    data: {
-      visible : true,
-      slides : xhr,
-    },
-
-  });
-
-
-});
-
-
-
+  // });
 
 
     // var storyTeller = new StoryTeller({
@@ -392,22 +394,22 @@ function styleGeoJSON(feature) {
 
 // from: http://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
 // TODO: Replace with d3 .json()
- function loadJSON(callback) {
+ // function loadJSON(callback) {
 
-    var xobj = new XMLHttpRequest();
+ //    var xobj = new XMLHttpRequest();
 
-    xobj.overrideMimeType('application/json');  // Svale: needed ??!?
-    xobj.responseType = 'json';
+ //    xobj.overrideMimeType('application/json');  // Svale: needed ??!?
+ //    xobj.responseType = 'json';
 
-    xobj.open('GET', '/slides.json', true);
-    xobj.onreadystatechange = function () {
-          if (xobj.readyState === 4 && xobj.status === 200) {
-            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-            callback(xobj.response);
-          }
-    };
-    xobj.send(null);
- }
+ //    xobj.open('GET', '/slides.json', true);
+ //    xobj.onreadystatechange = function () {
+ //          if (xobj.readyState === 4 && xobj.status === 200) {
+ //            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+ //            callback(xobj.response);
+ //          }
+ //    };
+ //    xobj.send(null);
+ // }
 
 
 }(window, document, L, Ractive, d3, topojson, queue, _, barchart));
