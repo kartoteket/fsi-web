@@ -124,7 +124,7 @@
 
         var slide,
             slides = this.get('slides'),
-            lastSlide = slides.length-1;
+            lastSlide = this.get('total')-1;
 
         // loop
         if(index < 0) {
@@ -310,6 +310,7 @@
         that.set({
           'loading' : false,
           'slides' : slides.data,
+          'total' : slides.data.length
         });
 
         // extend topjson with dataset properties

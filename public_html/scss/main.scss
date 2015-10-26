@@ -4,19 +4,18 @@
  */
 
 // base line
-$base-font-size:            16 !default;
+$base-font-size:            18 !default;
 $base-line-height:          24 !default;
 $base-space:                8 !default;
 
 // colors
 $page-background-color:    #242426 !default; // light: #CDD2D4 || dark: #242426
 
+
+$border-color:               rgb(81, 77, 78);
+$slide-background-color:    rgba(81, 77, 78, .77);
 // $slide-background-color :   rgba(0, 0, 0, .77);
 // $slide-background-color :   rgba(255, 255, 255, .77);
-
-
-$border-color:              rgb(81,77,78);
-$slide-background-color:    rgba(81, 77, 78,.77);
 
 // inuit
 $inuit-namespace:           inuit-;

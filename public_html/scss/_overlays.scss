@@ -15,7 +15,7 @@ $background-color : $slide-background-color;
 
     position: absolute;
     max-width: 40rem;
-    padding: rem-calc($base-space*2);
+    padding: rem-calc($base-space*1) rem-calc($base-space*2) rem-calc($base-space*6);
     border-radius: rem-calc($base-curves);
     background-color: $background-color;
     color: isitlight($background-color, #000, #fff);
@@ -39,6 +39,13 @@ $background-color : $slide-background-color;
         text-align: center;
     }
 
+    &__counter {
+        position: absolute;
+        opacity: .5;
+        right: rem-calc($base-space*2);
+        bottom: rem-calc($base-space*2);
+        @include font-size(14);
+    }
       // top: 50%;
       // transform: translateY(-50%);
 

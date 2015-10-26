@@ -59,6 +59,11 @@
             <a class="btn centered" href="#/page/{{ next }}"> {{ slide.linkText ? slide.linkText : 'Neste' }}
               <i class="icon-angle-double-right icon--large"></i>
             </a>
+
+            <div class="overlay__counter">
+              {{current+1}} / {{total}}
+            </div>
+
         </div>
     {{/if}}
   </script>
