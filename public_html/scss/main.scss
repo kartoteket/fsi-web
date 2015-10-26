@@ -62,6 +62,7 @@ $base-curves:               3;
 
 $inuit-btn-background:      rgb(225, 89, 78);
 $inuit-btn-color:           #fff;
+$inuit-btn-radius:          2px;
 @import '../bower_components/inuit-buttons/objects.buttons';
 
 @import 'base';
