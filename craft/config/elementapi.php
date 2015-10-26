@@ -12,15 +12,13 @@ function getLocation($address){
         {
             $geoLocations = craft()->cache->get('geoLocations');
         }
-
-// print_r($geoLocations);
+        // print_r($geoLocations);
 
         // is cached, use this
         if(array_key_exists($adrEncoded, $geoLocations))
         {
             $location = $geoLocations[$adrEncoded];
         }
-
 
         // else lookup new adress
         else {
@@ -38,6 +36,76 @@ function getLocation($address){
 }
 
 
+function getSlide($entry) {
+
+    $animations = [];
+    $markers    = [];
+    $highlights = [];
+
+     // basic data
+    $return = [
+        'title'    => $entry->title,
+        'subtitle' => $entry->subTitle,
+        'text'     => (string) $entry->text,
+        'linkText' => (string) $entry->linkText,
+        'position' => $entry->position->value,
+        'size'     => $entry->size->value,
+        'url'      => $entry->url,
+        'jsonUrl'  => UrlHelper::getUrl("slides/{$entry->id}.json"),
+    ];
+
+    // animations
+    foreach ($entry->animateTo->type('animation') as $i => $animation) {
+        $animations[$i]['position'] = $animation->position->value;
+        $animations[$i]['size']     = $animation->size->value;
+        $animations[$i]['duration'] = (int) $animation->duration;
+    };
+    if(!empty($animations)) {
+        $return['animateTo'] = $animations[0]; // might be multiple ??!?
+    }
+
+    // markers
+    foreach ($entry->markers as $marker) {
+
+        if(!empty($marker['lat']) && !empty($marker['long'])) {
+            $markers[] = array((float) $marker['lat'] , (float) $marker['long']);
+        }
+
+        if(!empty($marker['address'])) {
+            $markers[] = getLocation($marker['address']);
+        }
+    }
+
+    // highlights
+    foreach ($entry->highlight as $i => $country) {
+        $highlights[$country->value] =  $country->label;
+    }
+
+    // map
+    $map = [
+        'position' => getLocation($entry->mapCenter),
+        'zoom' => (int) $entry->mapZoom['value'],
+    ];
+    if(!empty($markers)) {
+        $map['markers'] = $markers;
+    }
+    if(!empty($highlights)) {
+        $map['highlights'] = $highlights;
+    }
+
+    $return['map'] = $map;
+
+    // callback
+    if(!empty($entry->callback)) {
+        $return['callback'] = $entry->callback;
+    }
+
+    return $return;
+
+};
+
+
+
 return [
     'endpoints' => [
         'slides.json' => [
@@ -49,72 +117,7 @@ return [
             'paginate' => false,
             'cache' => false,
             'transformer' => function(EntryModel $entry) {
-
-                // basic data
-                $return = [
-                    'title' => $entry->title,
-                    'subtitle' => $entry->subTitle,
-                    'text' => (string) $entry->text,
-                    'position' => $entry->position->value,
-                    'size' => $entry->size->value,
-                    'url' => $entry->url,
-                    'jsonUrl' => UrlHelper::getUrl("slides/{$entry->id}.json"),
-                ];
-
-                // animations
-                $animations = [];
-                foreach ($entry->animateTo->type('animation') as $i => $animation) {
-                    $animations[$i]['position'] = $animation->position->value;
-                    $animations[$i]['size'] = $animation->size->value;
-                    $animations[$i]['duration'] = (int) $animation->duration;
-                };
-                if(!empty($animations)) {
-                    $return['animateTo'] = $animations[0]; // might be multiple ??!?
-                }
-
-                // markers
-                $markers = [];
-                foreach ($entry->markers as $marker) {
-
-                    if(!empty($marker['lat']) && !empty($marker['long'])) {
-                        $markers[] = array((float) $marker['lat'] , (float) $marker['long']);
-                    }
-
-                    if(!empty($marker['address'])) {
-                        $markers[] = getLocation($marker['address']);
-                    }
-                }
-
-                // highlights
-                $highlights = [];
-                foreach ($entry->highlight as $i => $country) {
-                    $highlights[$country->value] =  $country->label;
-                }
-
-
-                // map
-                $map = [
-                    'position' => getLocation($entry->mapCenter),
-                    'zoom' => (int) $entry->mapZoom['value'],
-                ];
-                if(!empty($markers)) {
-                    $map['markers'] = $markers;
-                }
-                if(!empty($highlights)) {
-                    $map['highlights'] = $highlights;
-                }
-
-                $return['map'] = $map;
-
-                // callback
-                if(!empty($entry->callback)) {
-                    $return['callback'] = $entry->callback;
-                }
-
-
-                // return
-                return $return;
-
+                return getSlide($entry);
             },
         ],
         'slides/<entryId:\d+>.json' => function($entryId) {
@@ -123,72 +126,7 @@ return [
                 'criteria' => ['id' => $entryId],
                 'first' => true,
                 'transformer' => function(EntryModel $entry) {
-
-                    // basic data
-                    $return = [
-                        'title' => $entry->title,
-                        'subtitle' => $entry->subTitle,
-                        'text' => (string) $entry->text,
-                        'position' => $entry->position->value,
-                        'size' => $entry->size->value,
-                        'url' => $entry->url,
-                        'jsonUrl' => UrlHelper::getUrl("slides/{$entry->id}.json"),
-                    ];
-
-                    // animations
-                    $animations = [];
-                    foreach ($entry->animateTo->type('animation') as $i => $animation) {
-                        $animations[$i]['position'] = $animation->position->value;
-                        $animations[$i]['size'] = $animation->size->value;
-                        $animations[$i]['duration'] = (int) $animation->duration;
-                    };
-                    if(!empty($animations)) {
-                        $return['animateTo'] = $animations[0]; // might be multiple ??!?
-                    }
-
-                    // markers
-                    $markers = [];
-                    foreach ($entry->markers as $marker) {
-
-                        if(!empty($marker['lat']) && !empty($marker['long'])) {
-                            $markers[] = array((float) $marker['lat'] , (float) $marker['long']);
-                        }
-
-                        if(!empty($marker['address'])) {
-                            $markers[] = getLocation($marker['address']);
-                        }
-
-                    }
-
-                    // highlights
-                    $highlights = [];
-                    foreach ($entry->highlight as $i => $country) {
-                        $highlights[$country->value] =  $country->label;
-                    }
-
-                    // map
-                    $map = [
-                        'position' => getLocation($entry->mapCenter),
-                        'zoom' => (int) $entry->mapZoom['value'],
-                    ];
-                    if(!empty($markers)) {
-                        $map['markers'] = $markers;
-                    }
-                    if(!empty($highlights)) {
-                        $map['highlights'] = $highlights;
-                    }
-                    $return['map'] = $map;
-
-
-                    // callback
-                    if(!empty($entry->callback)) {
-                        $return['callback'] = $entry->callback;
-                    }
-
-
-                    // return
-                    return $return;
-
+                    return getSlide($entry);
                 },
             ];
         },
