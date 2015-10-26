@@ -33,9 +33,9 @@
 
   <script id="baseTemplate" type="text/ractive">
     {{#if visible}}
-<!--
+        <!--
         <div class="overlay overlay--{{slide.position}} overlay--{{slide.size}}" intro-outro="fade" style="top:{{slide.pos.top}}%; left:{{slide.pos.left}}%; bottom:{{slide.pos.bottom}}%; right:{{slide.pos.right}}%">
--->
+        -->
         <div class="overlay overlay--{{slide.position}} overlay--{{slide.size}}" intro-outro="fade">
 
             <h1 class="overlay__header">{{slide.title}}</h1>
@@ -43,19 +43,11 @@
             <div class="overlay__text">
               {{{slide.text}}}
             </div>
-<!--
-            <p>
-              <a href="#/page/0">home</a>
-              <a href="#/page/9">end</a>
-            </p>
--->
+
             {{#if chartEnabled}}
               <div class="chart"></div>
             {{/if}}
-<!--
-            <a class="btn" on-click="goto:{{current-1}}">Prev</a>
-            <a class="btn centered" on-click="goto:{{current+1}}">Next</a>
--->
+
             <a class="btn centered" href="#/page/{{ next }}"> {{ slide.linkText ? slide.linkText : 'Neste' }}
               <i class="icon-angle-double-right icon--large"></i>
             </a>
