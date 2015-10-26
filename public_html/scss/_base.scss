@@ -1,9 +1,15 @@
 body,
 html {
+    font-size: 18px;
     height: 100%;
     background-color: $page-background-color;
     font-family: Arial, sans-serif;
     line-height: 1.4;
+
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
 }
 
