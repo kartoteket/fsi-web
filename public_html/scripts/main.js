@@ -85,12 +85,16 @@
 
       this.map = L.map('map', {zoomControl: devMode, dragging: devMode, touchZoom: devMode, scrollWheelZoom: devMode, doubleClickZoom: devMode});
 
-      // L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-      L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+
+         // L.tileLayer('http://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png',
+      // L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+      L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+         {
+          // attribution: '&copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
         subdomains: 'abcd',
-        unloadInvisibleTiles: false,    // doc: http://mourner.github.io/Leaflet/reference.html#tilelayer-unloadinvisibletiles
-        reuseTiles: true                // doc: http://mourner.github.io/Leaflet/reference.html#tilelayer-reusetiles
+        unloadInvisibleTiles: !devMode,    // doc: http://mourner.github.io/Leaflet/reference.html#tilelayer-unloadinvisibletiles
+        reuseTiles: devMode                // doc: http://mourner.github.io/Leaflet/reference.html#tilelayer-reusetiles
       }).addTo(this.map);
 
       this.mapMarkers.addTo(this.map);
