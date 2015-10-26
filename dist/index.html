@@ -9,9 +9,9 @@
 	<meta name="description" content="">
   <meta name="viewport" content="width=device-width">
 
-  <link rel="stylesheet" href="styles/vendor-bfd0bcc30e.css">
+  <link rel="stylesheet" href="styles/vendor-3b264e8002.css">
 
-  <link rel="stylesheet" href="styles/main-5d8d5a9b25.css">
+  <link rel="stylesheet" href="styles/main-f705e1a7ef.css">
   <link rel="shortcut icon" href="/favicon.ico">
 
 </head>
@@ -49,7 +49,9 @@
             <a class="btn" on-click="goto:{{current-1}}">Prev</a>
             <a class="btn centered" on-click="goto:{{current+1}}">Next</a>
 -->
-            <a class="btn centered" href="#/page/{{ next }}">Next</a>
+            <a class="btn centered" href="#/page/{{ next }}"> {{ slide.linkText ? slide.linkText : 'Neste' }}
+              <i class="icon-angle-double-right icon--large"></i>
+            </a>
         </div>
     {{/if}}
   </script>
