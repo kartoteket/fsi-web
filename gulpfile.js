@@ -76,7 +76,12 @@ gulp.task('copy', function () {
         .pipe(gulp.dest('dist/data'))
         .pipe($.size());
 
-    return merge(root, data);
+    var fonts = gulp.src([
+            'public_html/fonts/*'])
+        .pipe(gulp.dest('dist/fonts'))
+        .pipe($.size());
+
+    return merge(root, data, fonts);
 });
 
 
