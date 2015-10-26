@@ -35,7 +35,9 @@
       next: 1,
     },
 
+    scoreToColor : false,
     map : {},
+    fsi : {},
     // topoJson : true,
     mapMarkers : L.layerGroup(),    // group for all markes
     mapGeoJSON : L.layerGroup(),    // group for all geoJSON layers
@@ -307,6 +309,8 @@
           return console.error(error);
         }
 
+        that.fsi = fsi;
+
         that.set({
           'loading' : false,
           'slides' : slides.data,
@@ -323,6 +327,9 @@
         }
         that.topoJson = topoJson;
 
+        // create a color scale using d3
+        that.scoreToColor = createColorScale(_.pluck(fsi, 'score'));
+
         // and now we can load a slide... 
         that.goto( that.get('current') );
 
@@ -338,7 +345,8 @@
 
       // inject the bar chart
       this.set('chartEnabled', true);
-      barchart('/fsi/2015.json?limit=10');
+      // barchart('/fsi/2015.json?limit=10');
+      barchart(this.fsi, 10);
 
     },
 
@@ -387,23 +395,15 @@
  * ****************************
  */
 
-
-function getColor(d) {
-// TODO: Replace....
-// console.log(d);
-      return d > 77 ? '#800026' :
-             d > 73  ? '#BD0026' :
-             d > 70  ? '#E31A1C' :
-             d > 60  ? '#FC4E2A' :
-             d > 50   ? '#FD8D3C' :
-             d > 40   ? '#FEB24C' :
-             d > 30   ? '#FED976' :
-                        '#FFEDA0';
+function createColorScale(scores) {
+  return d3.scale.quantile()
+          .domain(scores)
+          .range(['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026']); // http://colorbrewer2.org/?type=sequential&scheme=YlOrRd&n=5
 }
 
 function styleGeoJSON(feature) {
     return {
-        fillColor: getColor(feature.properties.score),
+        fillColor: storyTeller.scoreToColor(feature.properties.score),
         weight: 2,
         opacity: 1,
         color: 'white',
@@ -412,14 +412,24 @@ function styleGeoJSON(feature) {
     };
 }
 
+// function getColor(d) {
+// // TODO: Replace....
+// // console.log(d);
+//       return d > 77 ? '#800026' :
+//              d > 73  ? '#BD0026' :
+//              d > 70  ? '#E31A1C' :
+//              d > 60  ? '#FC4E2A' :
+//              d > 50   ? '#FD8D3C' :
+//              d > 40   ? '#FEB24C' :
+//              d > 30   ? '#FED976' :
+//                         '#FFEDA0';
+// }
 
 // function eventGeoJson(feature, layer) {
 // if (feature.properties && feature.properties.jurisdiction) {
 //         layer.bindPopup(feature.properties.jurisdiction);
 //     }
 // }
-
-
 
 // from: http://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
 // TODO: Replace with d3 .json()

@@ -1,10 +1,6 @@
 /*jslint browser: true, unused: false*/
 /*global d3 */
 
-/********************************** */
-// D3 (testing)
-/********************************** */
-
 /**
  * Wraps d3 text elemnt
  * @param  {[type]} text  d3 node
@@ -44,12 +40,19 @@ function wrap(text, width) {
  * @param  {[type]} input [description]
  * @return {[type]}       [description]
  */
-function barchart(input){
+function barchart(input, limit){
 
-  var margin = {top: 40, right: 80, bottom: 40, left: 0},
+  var data = input.slice(0, limit-1);
+
+  var margin = {top: 40, right: 80, bottom: 40, left: 20},
       width = 600 - margin.left - margin.right,
       height = 400 - margin.top - margin.bottom,
       viewBox = '0 0 600 400';
+
+  // color scale
+  var colorScale = d3.scale.quantile()
+          .domain(data.map(function(d) { return d.score; }))
+          .range(['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026']); // http://colorbrewer2.org/?type=sequential&scheme=YlOrRd&n=5
 
   // quantitative scale for x-axis
   var x = d3.scale.linear()
@@ -79,16 +82,11 @@ function barchart(input){
     .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-  // load data
-  d3.json(input, function(error, data) {
-
-    if (error) {
-      throw error;
-    }
 
     // force int ??!
     data.forEach(function(d) {
       d.score = +d.score;
+      d.value = +d.value;
     });
 
     // sort ascending
@@ -96,10 +94,9 @@ function barchart(input){
       function(a, b) { return a.rank - b.rank; }
       );
 
-  // console.log(data);
-
     // map quantative domain (the minimum and maximum value) to the x scale
-    x.domain([0, 100 /*d3.max(data, function(d) { return d.score; })*/]);
+    // x.domain([0, 100]);
+    x.domain([0, d3.max(data, function(d) { return d.value; })]);
 
     // map ordinal domain (names) to the y scale
     y.domain(data.map(function(d) { return d.rank; }));
@@ -115,7 +112,7 @@ function barchart(input){
         .attr('dy', 0)
         .attr('text-anchor','middle')
         .attr('class', 'label label--x')
-        .text('Secrecy Score')
+        .text('FSI-verdi')
         .call(wrap, 60);
 
     // paint the y axis
@@ -127,7 +124,7 @@ function barchart(input){
         .attr('dy', -10)
         .attr('text-anchor','middle')
         .attr('class', 'label label--y')
-        .text('FSI Rank');
+        .text('Plassering');
 
     // paint the bars
     svg.selectAll('.bar')
@@ -135,12 +132,11 @@ function barchart(input){
         .enter()
           .append('rect')
             .attr('class', 'bar')
+            .style('fill', function(d) { return colorScale(d.score); })
             .attr('y', function(d) { return y(d.rank); })
             .attr('height', y.rangeBand())
-            // .attr('x', function(d) { return x(d.score); })
-            // .attr('width', function(d) { return width - x(d.score); });
             .attr('x', 2)
-            .attr('width', function(d) { return x(d.score); });
+            .attr('width', function(d) { return x(d.value); });
 
 
     // add the labels
@@ -149,10 +145,9 @@ function barchart(input){
         .enter()
           .append('text')
             .text(function(d) {return d.jurisdiction; })
-            .attr('x', function(d) { return (x(d.score)+10); })
+            .attr('x', function(d) { return (x(d.value)+10); })
             .attr('y', function(d) { return y(d.rank); })
             .attr('dy', y.rangeBand()/1.8)
             .attr('class', 'label');
 
-  });
 }
