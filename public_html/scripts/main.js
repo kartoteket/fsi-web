@@ -385,6 +385,52 @@
 
     },
 
+    /**
+     * Draw mulitople polylines
+     * http://leafletjs.com/reference.html#polyline
+     */
+    callbackdrawUKLines : function() {
+
+      var uk_point,
+          latlngs,
+          polyline_options,
+          polyline;
+
+      // Create array of lat,lon points.
+      uk_point = [51.50729340171854, -0.12767851352691653];
+      latlngs = [
+        [uk_point, [4.434044005032582, 114.60937500000001]],  // brunei
+        [uk_point, [-20.4167169889457, 57.48046875000001]],   // Mauritius
+        [uk_point, [32.30106302536928, -64.76440429687501]],  // bermuda
+        [uk_point, [24.567108352576, -77.92602539062501]],    // bahamas
+        [uk_point, [19.290405639498005, -81.29882812500001]], // cayman islands
+        [uk_point, [18.46918890441719, -64.37988281250001]],  // british Virgin is
+        [uk_point, [17.088291217955476, -61.77612304687501]], // Antigua and Barb
+        [uk_point, [16.70986293320658, -62.20458984375001]],  // Montserrat
+        [uk_point, [17.151288449816747, -62.57812500000001]], // St. Kitts and Nevis
+        [uk_point, [18.245003052249718, -63.00659179687501]], // Anguilla
+        [uk_point, [15.355707666100942, -61.32843017578126]], // Dominica
+        [uk_point, [13.93140140744916, -60.94665527343751]],  // St lucia
+        [uk_point, [13.250639570043104, -61.18835449218751]], // St. Vin. and Gren.
+        [uk_point, [12.076924304193847, -61.66900634765626]], // grenada
+        [uk_point, [49.48061694200378, -2.5762939453125004]], // guernsey
+        [uk_point, [49.19785878427575, -2.0352172851562504]], // jersey
+        [uk_point, [54.25238930276849, -4.592285156250001]],  // Isle of man
+        [uk_point, [36.12414877519126, -5.346221923828126]],  // gibralter
+        [uk_point, [21.476672479184234, -71.14870548248292]], // Turks & Caicos Islands
+        [uk_point, [-21.22218129956861, -159.7892761230469]]  // Cook Islands
+      ];
+
+      // Define polyline options
+      polyline_options = {
+          color: '#bd0026'
+      };
+
+      polyline = L.polyline(latlngs, polyline_options).addTo(this.map);
+      this.mapOverlays.addLayer(polyline);
+
+    },
+
   });
 
   window.storyTeller = storyTeller;
