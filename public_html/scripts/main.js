@@ -493,9 +493,16 @@
  */
 
 function createColorScale(scores) {
-  return d3.scale.quantile()
-          .domain(scores)
-          .range(['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026']); // http://colorbrewer2.org/?type=sequential&scheme=YlOrRd&n=5
+
+  // filter out NaN
+  var _scores = _.filter(scores, function(score){ return !isNaN(score); });
+  // get min max for quantile, use _score directly for quantize
+  var domain = [d3.min(_scores), d3.max(_scores)];
+  var range = ['#ffffb2', '#fecc5c', '#fd8d3c', '#fd8d3c', '#f03b20', '#bd0026', '#bd0026']; // http://colorbrewer2.org/?type=sequential&scheme=YlOrRd&n=5
+
+  return d3.scale.quantize()
+          .domain(domain)
+          .range(range);
 }
 
 
