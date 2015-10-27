@@ -211,6 +211,7 @@
       // Clear Layers to clean up map
       this.mapMarkers.clearLayers();
       this.mapGeoJSON.clearLayers();
+      that.divIcon.options.html = '';
 
       // center / zoom
       if(this.map.getZoom() === undefined) {                  // initial state, nothing is set
