@@ -6,6 +6,8 @@
 
   'use strict';
 
+//  L.AwesomeMarkers.Icon.prototype.options.prefix = 'ion';
+
   L.TopoJSON = L.GeoJSON.extend({
     addData: function(jsonData) {
       if (jsonData.type === 'Topology') {
@@ -29,6 +31,7 @@
 
     template : '#baseTemplate',
     el: '#storyteller',
+
     data: {
       loading : true,
       current : 0,
@@ -41,6 +44,18 @@
     // topoJson : true,
     mapMarkers : L.layerGroup(),    // group for all markes
     mapGeoJSON : L.layerGroup(),    // group for all geoJSON layers
+
+    awsomeIcon : L.AwesomeMarkers.icon({
+      prefix: 'ion',
+      icon: 'locked', // ios-locked | ios-locked-outline | ion-social-usd
+      markerColor: 'red'
+    }),
+
+    divIcon : L.divIcon({
+      className: 'my-div-icon',
+      iconSize : [10,10]
+    }),
+
 
     // N-W-S-E coordinates for slides that in sum set size and position
     // todo, move to config object
@@ -101,6 +116,7 @@
 
       this.mapMarkers.addTo(this.map);
       this.mapGeoJSON.addTo(this.map);
+
 
       // Events (obsoloete - replaced by router)
       // this.on( 'goto', function ( event, index ) {
@@ -206,7 +222,11 @@
       // marker Layers
       if(_.has(slideMap,'markers')) {
         _.each(slideMap.markers, function(marker){
-          that.mapMarkers.addLayer(L.marker(marker));
+          // that.mapMarkers.addLayer(L.marker(marker));
+          if(marker.label) {
+            that.divIcon.options.html = '<h2>' + marker.label + '</h2>';
+          }
+          that.mapMarkers.addLayer(L.marker(marker.point, {icon: that.divIcon}));
         });
       }
 

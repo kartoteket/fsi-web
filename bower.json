@@ -29,7 +29,8 @@
     "ractive-transitions-fade": "~0.2.1",
     "underscore": "~1.8.3",
     "topojson": "~1.6.19",
-    "director": "~1.2.8"
+    "director": "~1.2.8",
+    "Leaflet.awesome-markers": "leaflet-awesome-markers#~2.0.2"
   },
   "overrides": {
     "ractive-transitions-fade": {

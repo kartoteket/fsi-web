@@ -65,14 +65,15 @@ function getSlide($entry) {
     }
 
     // markers
-    foreach ($entry->markers as $marker) {
+    foreach ($entry->markers as $i => $marker) {
 
-        if(!empty($marker['lat']) && !empty($marker['long'])) {
-            $markers[] = array((float) $marker['lat'] , (float) $marker['long']);
-        }
+        // if(!empty($marker['lat']) && !empty($marker['long'])) {
+        //     $markers[] = array((float) $marker['lat'] , (float) $marker['long']);
+        // }
 
         if(!empty($marker['address'])) {
-            $markers[] = getLocation($marker['address']);
+            $markers[$i]['point'] = getLocation($marker['address']);
+            $markers[$i]['label'] = $marker['label'];
         }
     }
 

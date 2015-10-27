@@ -1,5 +1,6 @@
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="icon-"],
+[class*=" icon-"] {
     display: inline-block;
     font-size: inherit;
     vertical-align: middle;
@@ -8,4 +9,27 @@
 .icon--large {
     padding-bottom: 5px; // bad hack to posiyion font awsome right double chevron
     font-size: 200%;
+}
+
+
+.my-div-icon {
+    display: block;
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border: 15px solid #ff0000;
+    border-radius: 50%;
+    background-color: #fff;
+    overflow: visible;
+
+    h2 {
+        @include font-size(16);
+        position: absolute;
+        padding: rem-calc($base-space);
+        border-radius: rem-calc($base-curves);
+        background-color: $slide-background-color;
+        color: isitlight($slide-background-color, #000, #fff);
+        white-space: nowrap;
+     }
+
 }
