@@ -51,7 +51,7 @@
     awsomeIcon : L.AwesomeMarkers.icon({
       prefix: 'ion',
       icon: 'locked', // ios-locked | ios-locked-outline | ion-social-usd
-      markerColor: 'red'
+      markerColor: '#bd0026'
     }),
 
     divIcon : L.divIcon({
