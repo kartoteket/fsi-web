@@ -134,11 +134,20 @@
         setTimeout( function() { that.transitionEnd(); }, 100);   // Race-condition: Jeg trenger et lite delay here, slik at ractive har oppdatert domen skikklig før evt callbacks blir kalt i transitionEnd
       });
 
+      // obeservs current slides and triggers a goto when changed (after everything is loaded)
       this.observe( 'current', function ( newValue, oldValue, keypath ) {
         if(newValue !== undefined && newValue !== oldValue && this.get('loading') === false) { // if loading is true, we wait for it to complete and the trigger the got from there
           this.goto( newValue );
         }
       });
+
+      // pick up lat/long on click when in devMode
+      if(devMode) {
+        this.map.on('click', function(e) {
+            console.log('[' + e.latlng.lat + ', ' + e.latlng.lng + ']');
+        });
+      }
+
     },
 
     goto : function( index ){
@@ -378,7 +387,7 @@
 
   });
 
-    window.storyTeller = storyTeller;
+  window.storyTeller = storyTeller;
 
 
 
