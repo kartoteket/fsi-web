@@ -42,8 +42,11 @@
     map : {},
     fsi : {},
     // topoJson : true,
-    mapMarkers : L.layerGroup(),    // group for all markes
-    mapGeoJSON : L.layerGroup(),    // group for all geoJSON layers
+
+    mapOverlays : L.layerGroup(),
+    // mapMarkers : L.layerGroup(),    // group for all markes
+    // mapGeoJSON : L.layerGroup(),    // group for all geoJSON layers
+    // mapLines : L.layerGroup(),      // group alle lines
 
     awsomeIcon : L.AwesomeMarkers.icon({
       prefix: 'ion',
@@ -114,8 +117,10 @@
         reuseTiles: devMode                // doc: http://mourner.github.io/Leaflet/reference.html#tilelayer-reusetiles
       }).addTo(this.map);
 
-      this.mapMarkers.addTo(this.map);
-      this.mapGeoJSON.addTo(this.map);
+      // this.mapMarkers.addTo(this.map);
+      // this.mapGeoJSON.addTo(this.map);
+      // this.mapLines.addTo(this.map);
+      this.mapOverlays.addTo(this.map);
 
 
       // Events (obsoloete - replaced by router)
@@ -209,8 +214,9 @@
           panOptionsDefault = {};
 
       // Clear Layers to clean up map
-      this.mapMarkers.clearLayers();
-      this.mapGeoJSON.clearLayers();
+      // this.mapMarkers.clearLayers();
+      // this.mapGeoJSON.clearLayers();
+      this.mapOverlays.clearLayers();
       that.divIcon.options.html = '';
 
       // center / zoom
@@ -223,11 +229,10 @@
       // marker Layers
       if(_.has(slideMap,'markers')) {
         _.each(slideMap.markers, function(marker){
-          // that.mapMarkers.addLayer(L.marker(marker));
           if(marker.label) {
             that.divIcon.options.html = '<h2>' + marker.label + '</h2>';
           }
-          that.mapMarkers.addLayer(L.marker(marker.point, {icon: that.divIcon}));
+          that.mapOverlays.addLayer(L.marker(marker.point, {icon: that.divIcon}));
         });
       }
 
@@ -273,7 +278,7 @@
           });
 
         // add layer to map
-        this.mapGeoJSON.addLayer(topoLayer);
+        this.mapOverlays.addLayer(topoLayer);
       // }
     },
 
