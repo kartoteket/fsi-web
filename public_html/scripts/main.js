@@ -402,8 +402,9 @@
 
       var uk_point,
           latlngs,
-          polyline_options,
-          polyline;
+          layer_options,
+          polyline,
+          that = this;
 
       // Create array of lat,lon points.
       uk_point = [51.50729340171854, -0.12767851352691653];
@@ -431,12 +432,18 @@
       ];
 
       // Define polyline options
-      polyline_options = {
+      layer_options = {
           color: '#bd0026'
       };
 
-      polyline = L.polyline(latlngs, polyline_options).addTo(this.map);
+      polyline = L.polyline(latlngs, layer_options).addTo(this.map);
       this.mapOverlays.addLayer(polyline);
+
+      _.each(latlngs, function(circle){
+        that.mapOverlays.addLayer(L.circleMarker(circle[1], layer_options).setRadius(2));
+      });
+
+
 
     },
 
