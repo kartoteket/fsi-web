@@ -284,16 +284,21 @@
           .setStyle(function (feature) {
             return {
                 fillColor: storyTeller.scoreToColor(feature.properties.score),
-                weight: 2,
-                opacity: 1,
-                color: 'white',
-                dashArray: '3',
-                fillOpacity: 0.7
+                weight: 1,
+                opacity: 0.6,
+                color: '#fff',
+                // dashArray: '1',
+                fillOpacity: 0.8
             };
           })
           .eachLayer(function (layer){
             layer.bindPopup(layer.feature.properties.name);
           });
+
+          // ad hoc override for slide 5 - color Britain red
+          if(this.get('current') === 5) {
+            topoLayer.setStyle({fillColor: '#bd0026'});
+          }
 
         // add layer to map
         this.mapOverlays.addLayer(topoLayer);
@@ -433,7 +438,8 @@
 
       // Define polyline options
       layer_options = {
-          color: '#bd0026'
+          color: '#bd0026',
+          opacity: 0.7,
       };
 
       polyline = L.polyline(latlngs, layer_options).addTo(this.map);
