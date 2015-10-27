@@ -281,7 +281,16 @@
 
         // add data, set styles and bind popup
         topoLayer.addData(x)
-          .setStyle(styleGeoJSON)
+          .setStyle(function (feature) {
+            return {
+                fillColor: storyTeller.scoreToColor(feature.properties.score),
+                weight: 2,
+                opacity: 1,
+                color: 'white',
+                dashArray: '3',
+                fillOpacity: 0.7
+            };
+          })
           .eachLayer(function (layer){
             layer.bindPopup(layer.feature.properties.name);
           });
@@ -482,16 +491,7 @@ function createColorScale(scores) {
           .range(['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026']); // http://colorbrewer2.org/?type=sequential&scheme=YlOrRd&n=5
 }
 
-function styleGeoJSON(feature) {
-    return {
-        fillColor: storyTeller.scoreToColor(feature.properties.score),
-        weight: 2,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.7
-    };
-}
+
 
 // function getColor(d) {
 // // TODO: Replace....
