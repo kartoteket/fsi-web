@@ -42,7 +42,7 @@ function wrap(text, width) {
  */
 function barchart(input, limit){
 
-  var data = input.slice(0, limit-1);
+  var data = input.slice(0, limit);
 
   var margin = {top: 40, right: 80, bottom: 40, left: 20},
       width = 600 - margin.left - margin.right,
