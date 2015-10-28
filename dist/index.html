@@ -11,9 +11,9 @@
 
   <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
-  <link rel="stylesheet" href="styles/vendor-c27532d8ca.css">
+  <link rel="stylesheet" href="styles/vendor-7db3424269.css">
 
-  <link rel="stylesheet" href="styles/main-7d2771a6b4.css">
+  <link rel="stylesheet" href="styles/main-47b0a6d401.css">
   <link rel="shortcut icon" href="/favicon.ico">
 
 </head>
@@ -43,12 +43,22 @@
               <div class="chart"></div>
             {{/if}}
 
-            <a class="btn" href="#/page/{{ next }}"> {{ slide.linkText ? slide.linkText : 'Neste' }}
-              <i class="icon-angle-double-right icon--large"></i>
+
+            {{#if next === 1 }}
+              <a class="btn" href="#/page/{{ next }}"><i class="icon-loop icon--large"></i></a>
+            {{/if}}
+
+            <a class="btn" href="{{ slide.linkUrl ? slide.linkUrl : '#/page/' + next  }}"> {{ slide.linkText ? slide.linkText : 'Neste' }}
+              {{#if slide.linkUrl }}
+                <i class="icon-share icon--large"></i>
+              {{else}}
+                <i class="icon-angle-double-right icon--large"></i>
+              {{/if}}
             </a>
 
             <div class="overlay__counter">
-              {{current+1}} / {{total}}
+              <a href="#/page/1" class="icon"><i class="icon-home"></i></a> |
+              {{current}} / <a href="#/page/{{total}}">{{total}}</a>
             </div>
 
         </div>
@@ -58,6 +68,6 @@
 
 	<script src="scripts/vendor-4360061c51.js"></script>
 
-	<script src="scripts/main-91f5e2da06.js"></script>
+	<script src="scripts/main-e860652790.js"></script>
 </body>
 </html>

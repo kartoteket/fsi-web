@@ -51,12 +51,22 @@
               <div class="chart"></div>
             {{/if}}
 
-            <a class="btn" href="#/page/{{ next }}"> {{ slide.linkText ? slide.linkText : 'Neste' }}
-              <i class="icon-angle-double-right icon--large"></i>
+
+            {{#if next === 1 }}
+              <a class="btn" href="#/page/{{ next }}"><i class="icon-loop icon--large"></i></a>
+            {{/if}}
+
+            <a class="btn" href="{{ slide.linkUrl ? slide.linkUrl : '#/page/' + next  }}"> {{ slide.linkText ? slide.linkText : 'Neste' }}
+              {{#if slide.linkUrl }}
+                <i class="icon-share icon--large"></i>
+              {{else}}
+                <i class="icon-angle-double-right icon--large"></i>
+              {{/if}}
             </a>
 
             <div class="overlay__counter">
-              {{current}} / {{total}}
+              <a href="#/page/1" class="icon"><i class="icon-home"></i></a> |
+              {{current}} / <a href="#/page/{{total}}">{{total}}</a>
             </div>
 
         </div>

@@ -48,6 +48,7 @@ function getSlide($entry) {
         'subtitle' => $entry->subTitle,
         'text'     => (string) $entry->text,
         'linkText' => (string) $entry->linkText,
+        'linkUrl'  => (string) $entry->linkUrl,
         'position' => $entry->position->value,
         'size'     => $entry->size->value,
         'url'      => $entry->url,

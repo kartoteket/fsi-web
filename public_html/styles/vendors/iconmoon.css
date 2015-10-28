@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'icomoon';
-	src:url('../../fonts/icomoon.eot?2d3wy7');
-	src:url('../../fonts/icomoon.eot?2d3wy7#iefix') format('embedded-opentype'),
-		url('../../fonts/icomoon.ttf?2d3wy7') format('truetype'),
-		url('../../fonts/icomoon.woff?2d3wy7') format('woff'),
-		url('../../fonts/icomoon.svg?2d3wy7#icomoon') format('svg');
+	src:url('../../fonts/icomoon.eot?9g1612');
+	src:url('../../fonts/icomoon.eot?9g1612#iefix') format('embedded-opentype'),
+		url('../../fonts/icomoon.ttf?9g1612') format('truetype'),
+		url('../../fonts/icomoon.woff?9g1612') format('woff'),
+		url('../../fonts/icomoon.svg?9g1612#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -26,3 +26,19 @@
 .icon-angle-double-right:before {
 	content: "\f101";
 }
+.icon-loop:before {
+	content: "\e00e";
+}
+.icon-home:before {
+	content: "\e29e";
+}
+.icon-earth:before {
+	content: "\e900";
+}
+.icon-share:before {
+	content: "\e901";
+}
+.icon-new-tab:before {
+	content: "\e902";
+}
+
