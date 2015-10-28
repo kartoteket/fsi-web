@@ -34,8 +34,8 @@
 
     data: {
       loading : true,
-      current : 0,
-      next: 1,
+      current : 1,
+      next: 2,
     },
 
     scoreToColor : false,
@@ -156,29 +156,24 @@
 
         var slide,
             slides = this.get('slides'),
-            lastSlide = this.get('total')-1;
+            lastSlide = this.get('total');
 
         // loop
-        if(index < 0) {
-          index = lastSlide;
-        } else if( index > lastSlide) {
-          index = 0;
+        if( index > lastSlide ) {
+          index = 1;
         }
 
         // get new slide
-        slide = slides[index];
+        slide = slides[Math.max(0, index-1)];    // arrays start at 0 not 1. Make sure we never get below 0
 
         // positoning (work in progress...)
         slide.pos = this.positions[slide.size][slide.position];
 
         // update ractive data
-        var promise = this.set({
-          // current: index,
-          next: index+1,
+        this.set({
+          next: ( index === lastSlide ) ? 1 : index+1,  // loop
           slide : slide
-        });
-
-        promise.then( this.updateMap() );
+        }).then( this.updateMap() );
 
         // if animate to new positions      => TODO: Dette bør heller evt (kanskje ikke) være en animert overgang mellom (alle?) slidene, med evt global switch on/off
         if( _.has(slide, 'animateTo') ) {
@@ -296,7 +291,7 @@
           });
 
           // ad hoc override for slide 5 - color Britain red
-          if(this.get('current') === 5) {
+          if(this.get('current') === 6) {
             topoLayer.setStyle({fillColor: '#bd0026'});
           }
 
@@ -348,7 +343,7 @@
 
       queue()
           .defer(d3.json, '/slides.json')
-          .defer(d3.json, '/data/all.json')
+          .defer(d3.json, '/data/all.json') // topojson
           .defer(d3.json, '/fsi/2015.json?limit=102')
           .await(_loadJson);
 
