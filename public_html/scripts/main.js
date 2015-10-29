@@ -1,8 +1,8 @@
 /*jslint browser: true, camelcase: false, latedef: nofunc  */
-/*global L, Ractive, d3, topojson, queue, _, barchart */
+/*global L, Ractive, d3, topojson, queue, _, barchart, Utils */
 
 
-(function (window, document, L, Ractive, d3, topojson, queue, _, barchart, undefined) {
+(function (window, document, L, Ractive, d3, topojson, queue, _, barchart, Utils, undefined) {
 
   'use strict';
 
@@ -372,7 +372,7 @@
         that.topoJson = topoJson;
 
         // create a color scale using d3
-        that.scoreToColor = createColorScale(_.pluck(fsi, 'score'));
+        that.scoreToColor = Utils.createColorScale(_.pluck(fsi, 'score'));
 
         // and now we can load a slide... 
         that.goto( that.get('current') );
@@ -493,18 +493,18 @@
  * ****************************
  */
 
-function createColorScale(scores) {
+// function createColorScale(scores) {
 
-  // filter out NaN
-  var _scores = _.filter(scores, function(score){ return !isNaN(score); });
-  // get min max for quantile, use _score directly for quantize
-  var domain = [d3.min(_scores), d3.max(_scores)];
-  var range = ['#ffffb2', '#fecc5c', '#fd8d3c', '#fd8d3c', '#f03b20', '#bd0026', '#bd0026']; // http://colorbrewer2.org/?type=sequential&scheme=YlOrRd&n=5
+//   // filter out NaN
+//   var _scores = _.filter(scores, function(score){ return !isNaN(score); });
+//   // get min max for quantile, use _score directly for quantize
+//   var domain = [d3.min(_scores), d3.max(_scores)];
+//   var range = ['#ffffb2', '#fecc5c', '#fd8d3c', '#fd8d3c', '#f03b20', '#bd0026', '#bd0026']; // http://colorbrewer2.org/?type=sequential&scheme=YlOrRd&n=5
 
-  return d3.scale.quantize()
-          .domain(domain)
-          .range(range);
-}
+//   return d3.scale.quantize()
+//           .domain(domain)
+//           .range(range);
+// }
 
 
 
@@ -547,4 +547,4 @@ function createColorScale(scores) {
  // }
 
 
-}(window, document, L, Ractive, d3, topojson, queue, _, barchart));
+}(window, document, L, Ractive, d3, topojson, queue, _, barchart, Utils));

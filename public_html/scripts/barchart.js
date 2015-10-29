@@ -1,5 +1,5 @@
 /*jslint browser: true, unused: false*/
-/*global d3 */
+/*global d3, Utils */
 
 /**
  * Wraps d3 text elemnt
@@ -42,6 +42,9 @@ function wrap(text, width) {
  */
 function barchart(input, limit){
 
+  // lets run this before we slice the input at the limit
+  var colorScale = Utils.createColorScale(input.map(function(d) { return d.score; }));
+
   var data = input.slice(0, limit);
 
   var margin = {top: 40, right: 80, bottom: 40, left: 20},
@@ -50,9 +53,10 @@ function barchart(input, limit){
       viewBox = '0 0 600 400';
 
   // color scale
-  var colorScale = d3.scale.quantile()
-          .domain(data.map(function(d) { return d.score; }))
-          .range(['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026']); // http://colorbrewer2.org/?type=sequential&scheme=YlOrRd&n=5
+  // var colorScale = d3.scale.quantile()
+  //         .domain(data.map(function(d) { return d.score; }))
+  //         .range(['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026']); // http://colorbrewer2.org/?type=sequential&scheme=YlOrRd&n=5
+
 
   // quantitative scale for x-axis
   var x = d3.scale.linear()
