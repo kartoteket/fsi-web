@@ -74,7 +74,7 @@ gulp.task('copy', function () {
     var root = gulp.src([
             'public_html/.htaccess',
             'public_html/robots.txt',
-            'public_html/index.php'])
+            'public_html/index.php',])
         .pipe(gulp.dest('dist'))
         .pipe($.size());
 
@@ -88,7 +88,12 @@ gulp.task('copy', function () {
         .pipe(gulp.dest('dist/fonts'))
         .pipe($.size());
 
-    return merge(root, data, fonts);
+    var icons = gulp.src([
+            'public_html/styles/icons/**/*'])
+        .pipe(gulp.dest('dist/styles/icons'))
+        .pipe($.size());
+
+    return merge(root, data, fonts, icons);
 });
 
 
