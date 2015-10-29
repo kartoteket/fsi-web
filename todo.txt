@@ -1,18 +1,32 @@
+Pre-lanseinrg:
+. stressteste server (Siege)
+. skru av devmode og test, test, test
+. oppdatere Craft og test !!!
 
+TODO:
 
-Møte 23.10 fra 12 til 13:15
-
-
-TODO, til tirsdag:
-. legge inn alle slides med overskrifter
-. teste mørke kart igjen
-. legg til slide "4/30"
-. Avgrens zoom til range 2-7
-. sette color scheme til 5-class YlOrRd
-. la bargraphen vis FSI-value (440 - 1400), med fargekoding for Score. Endre Rank til "Plassering", X-axs lablel "FAI-verdi"
-.Storbritannia: streker til alle relaterte stater (blå og lyseblå i PDF)
-. Legge til Logo på kartet på første  og siste side (sentrert under slides)
+. flytte navn på land inn i bar
 . legge til pilatester (venstre/opp = tilbake | høyre/ned = frem)
+. justere labels på markers
+. litt mindre markers
+. få til fade in/out på overlays-layeret (bruke opacity og transitions ?)
+
+
+DONE:
+X justere ned font-størrelser en smule på mobil...
+X Legge til logo på kartet på første og siste side (sentrert under slides)
+X legge til subtilt home-link/-icon i venstre hjørne
+X lage linker til siste sliden
+X fikse pageing 0 = 1
+X topp 10 er ni...
+X sjekk farger (quantize i 7 blokker..)
+X legge inn alle slides med overskrifter
+X teste mørke kart igjen
+X legg til slide "4/30"
+- Avgrens zoom til range 2-7 => Nope, funker bra å zoome inn hvis man fjerner geojson-laget
+X sette color scheme til 5-class YlOrRd
+X la bargraphen vis FSI-value (0 - 1400), med fargekoding for Score. Endre Rank til "Plassering", X-axs lablel "FSI-verdi"
+X Storbritannia: streker til alle relaterte stater (blå og lyseblå i PDF)
 
 
 

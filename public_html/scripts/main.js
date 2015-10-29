@@ -98,7 +98,7 @@
       this.loadJson();
 
       var that = this,
-          devMode = true;
+          devMode = false;
 
       // initiate Leaflet map
       L.Icon.Default.imagePath = 'images/';
@@ -135,7 +135,7 @@
       });
 
       // obeservs current slides and triggers a goto when changed (after everything is loaded)
-      this.observe( 'current', function ( newValue, oldValue, keypath ) {
+      this.observe( 'current', function ( newValue, oldValue) {
         if(newValue !== undefined && newValue !== oldValue && this.get('loading') === false) { // if loading is true, we wait for it to complete and the trigger the got from there
           this.goto( newValue );
         }

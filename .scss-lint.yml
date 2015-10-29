@@ -1,4 +1,5 @@
-# exclude:
+scss_files: 'public_html/scss/**/*.scss'
+exclude: 'public_html/styles/vendors/**'
 
 linters:
   ColorVariable:
