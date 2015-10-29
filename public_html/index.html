@@ -24,6 +24,16 @@
   <!-- endbuild -->
   <link rel="shortcut icon" href="/favicon.ico">
 
+      <script>
+        // jshint ignore: start
+        /*! grunt-grunticon Stylesheet Loader - v2.1.2 | https://github.com/filamentgroup/grunticon | (c) 2015 Scott Jehl, Filament Group, Inc. | MIT license. */
+
+  (function(e){function t(t,n,r,o){"use strict";function a(){for(var e,n=0;u.length>n;n++)u[n].href&&u[n].href.indexOf(t)>-1&&(e=!0);e?i.media=r||"all":setTimeout(a)}var i=e.document.createElement("link"),l=n||e.document.getElementsByTagName("script")[0],u=e.document.styleSheets;return i.rel="stylesheet",i.href=t,i.media="only x",i.onload=o||null,l.parentNode.insertBefore(i,l),a(),i}var n=function(r,o){"use strict";if(r&&3===r.length){var a=e.navigator,i=e.Image,l=!(!document.createElementNS||!document.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect||!document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image","1.1")||e.opera&&-1===a.userAgent.indexOf("Chrome")||-1!==a.userAgent.indexOf("Series40")),u=new i;u.onerror=function(){n.method="png",n.href=r[2],t(r[2])},u.onload=function(){var e=1===u.width&&1===u.height,a=r[e&&l?0:e?1:2];n.method=e&&l?"svg":e?"datapng":"png",n.href=a,t(a,null,null,o)},u.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",document.documentElement.className+=" grunticon"}};n.loadCSS=t,e.grunticon=n})(this);(function(e,t){"use strict";var n=t.document,r="grunticon:",o=function(e){if(n.attachEvent?"complete"===n.readyState:"loading"!==n.readyState)e();else{var t=!1;n.addEventListener("readystatechange",function(){t||(t=!0,e())},!1)}},a=function(e){return t.document.querySelector('link[href$="'+e+'"]')},c=function(e){var t,n,o,a,c,i,u={};if(t=e.sheet,!t)return u;n=t.cssRules?t.cssRules:t.rules;for(var l=0;n.length>l;l++)o=n[l].cssText,a=r+n[l].selectorText,c=o.split(");")[0].match(/US\-ASCII\,([^"']+)/),c&&c[1]&&(i=decodeURIComponent(c[1]),u[a]=i);return u},i=function(e){var t,o,a;o="data-grunticon-embed";for(var c in e)if(a=c.slice(r.length),t=n.querySelectorAll(a+"["+o+"]"),t.length)for(var i=0;t.length>i;i++)t[i].innerHTML=e[c],t[i].style.backgroundImage="none",t[i].removeAttribute(o);return t},u=function(t){"svg"===e.method&&o(function(){i(c(a(e.href))),"function"==typeof t&&t()})};e.embedIcons=i,e.getCSS=a,e.getIcons=c,e.ready=o,e.svgLoadedCallback=u,e.embedSVG=u})(grunticon,this);
+
+        grunticon(["styles/icons/icons.data.svg.css", "styles/icons/icons.data.png.css", "styles/icons/icons.fallback.css"]);
+      </script>
+      <noscript><link href="icons.fallback.css" rel="stylesheet"></noscript>
+
 </head>
 <body>
 
@@ -39,36 +49,49 @@
         <!--
         <div class="overlay overlay--{{slide.position}} overlay--{{slide.size}}" intro-outro="fade" style="top:{{slide.pos.top}}%; left:{{slide.pos.left}}%; bottom:{{slide.pos.bottom}}%; right:{{slide.pos.right}}%">
         -->
-        <div class="overlay overlay--{{slide.position}} overlay--{{slide.size}}" intro-outro="fade">
+        <div class="overlay-outer overlay--{{slide.position}} ">
+          <div class="overlay overlay--{{slide.size}}" intro-outro="fade">
 
-            <h1 class="overlay__header">{{slide.title}}</h1>
-            <h2 class="overlay__subheader">{{slide.subTitle}}</h2>
-            <div class="overlay__text">
-              {{{slide.text}}}
-            </div>
+              <h1 class="overlay__header">{{slide.title}}</h1>
 
-            {{#if chartEnabled}}
-              <div class="chart"></div>
-            {{/if}}
-
-
-            {{#if next === 1 }}
-              <a class="btn" href="#/page/{{ next }}"><i class="icon-loop icon--large"></i></a>
-            {{/if}}
-
-            <a class="btn" href="{{ slide.linkUrl ? slide.linkUrl : '#/page/' + next  }}"> {{ slide.linkText ? slide.linkText : 'Neste' }}
-              {{#if slide.linkUrl }}
-                <i class="icon-share icon--large"></i>
-              {{else}}
-                <i class="icon-angle-double-right icon--large"></i>
+              {{#if slide.subTitle}}
+              <h2 class="overlay__subheader">{{slide.subTitle}}</h2>
               {{/if}}
-            </a>
 
-            <div class="overlay__counter">
-              <a href="#/page/1" class="icon"><i class="icon-home"></i></a> |
-              {{current}} / <a href="#/page/{{total}}">{{total}}</a>
-            </div>
+              <div class="overlay__text">
+                {{{slide.text}}}
+              </div>
 
+              {{#if chartEnabled}}
+                <div class="chart"></div>
+              {{/if}}
+
+
+              {{#if next === 1 }}
+                <a class="btn hide-for-small" href="#/page/{{ next }}"><i class="icon-loop icon--large"></i></a>
+              {{/if}}
+
+              <a class="btn" target="_parent" href="{{ slide.linkUrl ? slide.linkUrl : '#/page/' + next  }}"> {{ slide.linkText ? slide.linkText : 'Neste' }}
+                {{#if slide.linkUrl }}
+                  <i class="icon-share icon--large"></i>
+                {{else}}
+                  <i class="icon-angle-double-right icon--large"></i>
+                {{/if}}
+              </a>
+
+              <div class="overlay__counter">
+              {{#if next === 1 }}
+                <span class="show-for-small-only"><a href="#/page/1" class="icon"><i class="icon-loop"></i></a> |</span>
+              {{/if}}
+                <a href="#/page/1" class="icon"><i class="icon-home"></i></a> |
+                {{current}} / <a href="#/page/{{total}}">{{total}}</a>
+              </div>
+
+          </div>
+
+          {{#if next < 3  }} <!-- first or last slide -->
+            <div class="logo centered tax_justice_logo"></div>
+          {{/if}}
         </div>
     {{/if}}
   </script>

@@ -61,6 +61,13 @@ gulp.task('images', function () {
         .pipe($.size());
 });
 
+gulp.task('svg', function () {
+    return gulp.src('svg/**/*.svg')
+        .pipe($.svgmin())
+        .pipe(gulp.dest('public_html/images'));
+});
+
+
 // Copy other frontend files
 gulp.task('copy', function () {
 
