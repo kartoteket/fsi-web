@@ -60,3 +60,24 @@
         line-height: $line-height;
     }
 }
+
+
+/**
+ * (c) Foundation for Apps
+ * http://foundation.zurb.com/apps/
+ * https://github.com/zurb/foundation-apps/blob/master/scss/components/_utilities.scss
+ */
+
+.hide-for-small {
+    @include respond-to(small) {
+        display: none !important;
+    }
+}
+
+.show-for-small-only {
+    display: none !important;
+
+    @include respond-to(small) {
+        display: inline-block;
+    }
+}

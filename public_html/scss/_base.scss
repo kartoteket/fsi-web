@@ -16,6 +16,13 @@ html {
 
 .btn {
     @extend %inuit-btn;
+    @include respond-to(small)  {
+        @include font-size(14);
+        padding: $inuit-btn-padding--small - $inuit-btn-border-width  double($inuit-btn-padding--small) - $inuit-btn-border-width;
+     }
+    // @include respond-to(medium) {  }
+    // @include respond-to(large)  {  }
+    // @include respond-to(xxlarge){  }
 }
 
 

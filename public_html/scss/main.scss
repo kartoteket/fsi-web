@@ -40,6 +40,7 @@ $breakpoints: (
     // 'xlarge': (min-width: 1600px),
     // 'xxlarge': (min-width: 1920px)
 );
+$breakpoint-classes: (small medium large xlarge xxlarge);
 
 // other
 $base-font-weight :         400 !default;
