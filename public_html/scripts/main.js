@@ -453,6 +453,20 @@
 
   window.storyTeller = storyTeller;
 
+  // but where should i put this then ??!?
+  document.onkeydown = function(e) {
+      var current = storyTeller.get('current'),
+          next = storyTeller.get('next');
+      e = e || window.event;
+      switch(e.which || e.keyCode) {
+          case 37: // left
+            storyTeller.set('current',current-1); break;
+          case 39: // right
+            storyTeller.set('current', next); break;
+          default: return; // exit this handler for other keys
+      }
+      e.preventDefault(); // prevent the default action (scroll / move caret)
+  };
 
 
 
