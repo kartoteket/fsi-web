@@ -53,6 +53,34 @@
         }
     }
 
+    // TODO: A bit ad-hoc. should be cleanded up
+    &__btns {
+        display: flex;
+
+        .btn--text {
+            flex: 1 1 auto;
+            padding-right: 0;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            text-align: right;
+        }
+
+        .btn--prev,
+        .btn--next {
+            flex: 0 1 auto;
+        }
+
+        .btn--next {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .btn--prev + .btn--text {
+            margin-left: 2px;
+        }
+
+    }
+
     &__counter {
         @include font-size(14);
         position: absolute;

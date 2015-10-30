@@ -66,25 +66,41 @@
                 <div class="chart"></div>
               {{/if}}
 
+              <div class="overlay__btns">
 
-              {{#if next === 1 }}
-                <a class="btn hide-for-small" href="#/page/{{ next }}"><i class="icon-loop icon--large"></i></a>
-              {{/if}}
 
-              <a class="btn" target="_parent" href="{{ slide.linkUrl ? slide.linkUrl : '#/page/' + next  }}"> {{ slide.linkText ? slide.linkText : 'Neste' }}
-                {{#if slide.linkUrl }}
-                  <i class="icon-share icon--large"></i>
-                {{else}}
-                  <i class="icon-angle-double-right icon--large"></i>
+                {{#if next === 1 }}
+                  <a class="btn btn--prev hide-for-small" href="#/page/{{ next }}"><i class="icon-loop icon--large"></i></a>
+                {{elseif next > 2}}
+                  <a class="btn btn--prev btn--slim hide-for-small" href="#/page/{{ current-1 }}"><i class="icon-keyboard_arrow_left icon--large"></i></a>
                 {{/if}}
-              </a>
+
+                <a class="btn btn--text" {{#if slide.linkUrl }}target="_parent"{{/if}} href="{{ slide.linkUrl ? slide.linkUrl : '#/page/' + next  }}">
+                  {{ slide.linkText ? slide.linkText : 'Neste' }}
+                </a>
+
+                <a class="btn btn--next btn--slim" {{#if slide.linkUrl }}target="_parent"{{/if}} href="{{ slide.linkUrl ? slide.linkUrl : '#/page/' + next  }}">
+                  {{#if slide.linkUrl }}
+                    <i class="icon-share icon--large"></i>
+                  {{else}}
+                    <i class="icon-keyboard_arrow_right icon--large"></i>
+                  {{/if}}
+                </a>
+
+              </div>
 
               <div class="overlay__counter">
-              {{#if next === 1 }}
-                <span class="show-for-small-only"><a href="#/page/1" class="icon"><i class="icon-loop"></i></a> |</span>
-              {{/if}}
+
+                {{#if next === 1 }}
+                  <span class="show-for-small-only"><a href="#/page/1" class="icon"><i class="icon-loop"></i></a> |</span>
+                {{elseif next > 2}}
+                  <span class="show-for-small-only"><a href="#/page/{{ current-1 }}" class="icon"><i class="icon-keyboard_arrow_left"></i></a> |</span>
+                {{/if}}
+
                 <a href="#/page/1" class="icon"><i class="icon-home"></i></a> |
+
                 {{current}} / <a href="#/page/{{total}}">{{total}}</a>
+
               </div>
 
           </div>

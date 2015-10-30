@@ -7,11 +7,13 @@
 }
 
 .icon--large {
-    padding-bottom: 5px; // bad hack to posiyion font awsome right double chevron
+    // padding-bottom: 5px; // bad hack to posiyion font awsome right double chevron
     font-size: 200%;
-    @include respond-to(small)  {
-        font-size: 100%;
-     }
+    line-height: .7;
+
+    // @include respond-to(small)  {
+    //     font-size: 100%;
+    //  }
 }
 
 
