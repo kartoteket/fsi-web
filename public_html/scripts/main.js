@@ -48,11 +48,12 @@
     // mapGeoJSON : L.layerGroup(),    // group for all geoJSON layers
     // mapLines : L.layerGroup(),      // group alle lines
 
-    awsomeIcon : L.AwesomeMarkers.icon({
-      prefix: 'ion',
-      icon: 'locked', // ios-locked | ios-locked-outline | ion-social-usd
-      markerColor: '#bd0026'
-    }),
+    // Not in use
+    // awsomeIcon : L.AwesomeMarkers.icon({
+    //   prefix: 'ion',
+    //   icon: 'locked', // ios-locked | ios-locked-outline | ion-social-usd
+    //   markerColor: '#bd0026'
+    // }),
 
     divIcon : L.divIcon({
       className: 'my-div-icon',
