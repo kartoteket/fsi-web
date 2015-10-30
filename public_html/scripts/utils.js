@@ -15,8 +15,6 @@
               // we use 7 buttons since TJN does in their FSI, duplicating colors for bucket 3 and 7
               var range = ['#ffffb2', '#fecc5c', '#fd8d3c', '#fd8d3c', '#f03b20', '#bd0026', '#bd0026']; // http://colorbrewer2.org/?type=sequential&scheme=YlOrRd&n=5
 
-              console.log(_scores);
-
               return d3.scale.quantize()
                       .domain(domain)
                       .range(range);

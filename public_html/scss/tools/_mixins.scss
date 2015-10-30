@@ -78,6 +78,6 @@
     display: none !important;
 
     @include respond-to(small) {
-        display: inline-block;
+        display: inline-block !important;
     }
 }

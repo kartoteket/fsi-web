@@ -1,18 +1,19 @@
-Pre-lanseinrg:
-. stressteste server (Siege)
-. skru av devmode og test, test, test
+Senere:
 . oppdatere Craft og test !!!
 
-TODO:
+Pre-lanseinrg:
+. stressteste server (Siege)
 
+TODO:
 . flytte navn på land inn i bar
-. legge til pilatester (venstre/opp = tilbake | høyre/ned = frem)
 . justere labels på markers
 . litt mindre markers
 . få til fade in/out på overlays-layeret (bruke opacity og transitions ?)
 
-
 DONE:
+X legge til pilatester (venstre = tilbake | høyre/ = frem)
+X skru av devmode og test, test, test
+X Legge til back-knapp
 X justere ned font-størrelser en smule på mobil...
 X Legge til logo på kartet på første og siste side (sentrert under slides)
 X legge til subtilt home-link/-icon i venstre hjørne

@@ -31,7 +31,6 @@
 
     template : '#baseTemplate',
     el: '#storyteller',
-
     data: {
       loading : true,
       current : 1,
@@ -141,6 +140,7 @@
           this.goto( newValue );
         }
       });
+
 
       // pick up lat/long on click when in devMode
       if(devMode) {
