@@ -117,7 +117,7 @@ return [
                 'order' => 'postDate'
             ],
             'paginate' => false,
-            'cache' => false,
+            'cache' => true,
             'transformer' => function(EntryModel $entry) {
                 return getSlide($entry);
             },
