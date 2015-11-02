@@ -1,8 +1,8 @@
 /*jslint browser: true, camelcase: false, latedef: nofunc  */
-/*global L, Ractive, d3, topojson, queue, _, barchart, Utils */
+/*global L, Ractive, d3, topojson, queue, _, barchart, Utils, ga */
 
 
-(function (window, document, L, Ractive, d3, topojson, queue, _, barchart, Utils, undefined) {
+(function (window, document, L, Ractive, d3, topojson, queue, _, barchart, Utils, ga, undefined) {
 
   'use strict';
 
@@ -180,6 +180,14 @@
         if( _.has(slide, 'animateTo') ) {
             this.animateSlide();
         }
+
+        // track
+        // console.log('ga beacon...');
+        ga('set', {
+          page: '/#/page/' + this.get('current'),
+          title: this.get('slide.title')
+        });
+        ga('send', 'pageview');
 
         // update map
         // this.updateMap();
@@ -562,4 +570,4 @@
  // }
 
 
-}(window, document, L, Ractive, d3, topojson, queue, _, barchart, Utils));
+}(window, document, L, Ractive, d3, topojson, queue, _, barchart, Utils, ga));
