@@ -183,6 +183,7 @@
 
         // track
         // console.log('ga beacon...');
+        // window.ga_debug = {trace: true};
         ga('set', {
           page: '/#/page/' + this.get('current'),
           title: this.get('slide.title')
